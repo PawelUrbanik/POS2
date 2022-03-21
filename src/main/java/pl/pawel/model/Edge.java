@@ -14,6 +14,8 @@ public class Edge {
     private String egdeName;
     @OneToMany(mappedBy = "edge")
     private Set<Track> tracks;
+    @ManyToOne
+    private Platform platform;
 
 
 
