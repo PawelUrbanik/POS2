@@ -17,4 +17,7 @@ public class Platform {
     @OneToMany(mappedBy = "platform")
     private Set<Edge> edges;
 
+    @ManyToOne
+    private OperatingControlPoint operatingControlPoint;
+
 }
