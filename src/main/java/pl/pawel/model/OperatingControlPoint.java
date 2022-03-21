@@ -17,5 +17,6 @@ public class OperatingControlPoint {
     private Discriminant discriminant;
     @OneToOne
     private LoadingPoint loadingPoint;
-//    private RailwayDepartment railwayDepartment;
+    @ManyToOne
+    private RailwayDepartment railwayDepartment;
 }
