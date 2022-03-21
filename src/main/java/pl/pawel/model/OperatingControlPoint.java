@@ -13,8 +13,9 @@ public class OperatingControlPoint {
     private String pointName;
     @OneToMany(mappedBy = "operatingControlPoint")
     private Set<Platform> platforms;
-    
+
     private Discriminant discriminant;
-//    private LoadingPoint loadingPoint;
+    @OneToOne
+    private LoadingPoint loadingPoint;
 //    private RailwayDepartment railwayDepartment;
 }
