@@ -1,9 +1,6 @@
 package pl.pawel.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,11 +12,15 @@ public class Track {
 
     private Integer trackNumber;
     private Double axisKm;
+    @ManyToOne
+    @JoinColumn(name = "edge_id", nullable = false)
+    private Edge edge;
 
-    public Track(Long id, Integer trackNumber, Double axisKm) {
+    public Track(Long id, Integer trackNumber, Double axisKm, Edge edge) {
         this.id = id;
         this.trackNumber = trackNumber;
         this.axisKm = axisKm;
+        this.edge = edge;
     }
 
     public Track() {
