@@ -51,17 +51,25 @@ public class Track {
         this.axisKm = axisKm;
     }
 
+    public Edge getEdge() {
+        return edge;
+    }
+
+    public void setEdge(Edge edge) {
+        this.edge = edge;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Track track = (Track) o;
-        return Objects.equals(id, track.id) && Objects.equals(trackNumber, track.trackNumber) && Objects.equals(axisKm, track.axisKm);
+        return Objects.equals(id, track.id) && Objects.equals(trackNumber, track.trackNumber) && Objects.equals(axisKm, track.axisKm) && Objects.equals(edge, track.edge);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, trackNumber, axisKm);
+        return Objects.hash(id, trackNumber, axisKm, edge);
     }
 
     @Override
@@ -70,6 +78,7 @@ public class Track {
                 "id=" + id +
                 ", trackNumber=" + trackNumber +
                 ", axisKm=" + axisKm +
+                ", edge=" + edge.getEgdeName() +
                 '}';
     }
 }
