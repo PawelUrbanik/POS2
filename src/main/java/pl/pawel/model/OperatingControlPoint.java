@@ -19,4 +19,7 @@ public class OperatingControlPoint {
     private LoadingPoint loadingPoint;
     @ManyToOne
     private RailwayDepartment railwayDepartment;
+
+    @ManyToOne
+    private Line line;
 }
