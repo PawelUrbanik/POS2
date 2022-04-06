@@ -15,6 +15,7 @@ public class OperatingControlPoint {
     @OneToMany(mappedBy = "operatingControlPoint")
     private Set<Platform> platforms;
 
+    @OneToOne
     private Discriminant discriminant;
     @OneToOne
     private LoadingPoint loadingPoint;

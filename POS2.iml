@@ -15,6 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="POS2" value="65ee8752-bf3c-4ea1-8d76-5d05bbb3de93" />
           <factory-entry name="entityManagerFactory" />
         </datasource-mapping>
         <naming-strategy-map />
@@ -24,7 +25,7 @@
       <configuration />
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_16">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_X">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -126,5 +127,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.16" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.3.16" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.8.4" level="project" />
+    <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:8.0.5" level="project" />
   </component>
 </module>
