@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.pawel.model.Edge;
 import pl.pawel.repository.EdgeRepository;
@@ -49,6 +51,19 @@ public class EdgeController {
         );
         return new ResponseEntity<>(repository.findAll(pageable).getContent(), HttpStatus.OK);
     }
+
+    /**
+     * Get one edge by id parameter
+     * @param id
+     * @return found edge
+     */
+    @GetMapping("/edge/{id}")
+    public ResponseEntity<Edge> getEdgeById(@PathVariable Long id){
+        logger.info("REQUES GET ONE EDGE by id");
+        return ResponseEntity.ok(repository.getById(id));
+    }
+
+
 
 
 }
