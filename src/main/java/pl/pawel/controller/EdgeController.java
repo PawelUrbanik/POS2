@@ -14,6 +14,7 @@ import pl.pawel.model.Edge;
 import pl.pawel.repository.EdgeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EdgeController {
@@ -59,8 +60,10 @@ public class EdgeController {
      */
     @GetMapping("/edge/{id}")
     public ResponseEntity<Edge> getEdgeById(@PathVariable Long id){
-        logger.info("REQUES GET ONE EDGE by id");
-        return ResponseEntity.ok(repository.getById(id));
+        logger.info("REQUES GET ONE EDGE by id: "+ id);
+
+        Optional<Edge> edge = repository.findById(id);
+        return edge.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
