@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.pawel.model.Edge;
 import pl.pawel.repository.EdgeRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,8 +70,9 @@ public class EdgeController {
      * @return badRequest(400) if not saved or created(201) + created object
      */
     @PostMapping(value = "/edges")
-    public ResponseEntity<?> saveEdge(@RequestBody Edge edge)
+    public ResponseEntity<?> saveEdge(@RequestBody @Valid Edge edge)
     {
+        //TODO Add field constraints to Edge entity to valid properly
         Edge saved = repository.save(edge);
         return (saved == null)? ResponseEntity.badRequest().build() : new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
