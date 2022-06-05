@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.pawel.model.Edge;
 import pl.pawel.repository.EdgeRepository;
 
@@ -64,6 +61,18 @@ public class EdgeController {
 
         Optional<Edge> edge = repository.findById(id);
         return edge.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Save edge method
+     * @param edge param from request
+     * @return badRequest(400) if not saved or created(201) + created object
+     */
+    @PostMapping(value = "/edges")
+    public ResponseEntity<?> saveEdge(@RequestBody Edge edge)
+    {
+        Edge saved = repository.save(edge);
+        return (saved == null)? ResponseEntity.badRequest().build() : new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
 
