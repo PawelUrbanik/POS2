@@ -77,6 +77,32 @@ public class EdgeController {
         return (saved == null)? ResponseEntity.badRequest().build() : new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
+    /**
+     * Update edsge request
+     * @param id id of the object to update
+     * @param toUpdate object to update
+     * @return if not exist notFound(404), if not the dame ids badRequest(400), if updated noContent(204)
+     */
+    @PutMapping("/edge/{id}")
+    public ResponseEntity<?> updateEdge(@RequestParam Long id, @Valid Edge toUpdate)
+    {
+
+        if (!repository.existsById(id))
+        {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (toUpdate.getId()!= 0 && !id.equals(toUpdate.getId()))
+        {
+            return ResponseEntity.badRequest().build();
+        }
+
+        //TODO Add method to Edge class
+        repository.findById(id).ifPresent(edge -> {edge.updateFrom(toUpdate);});
+
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 
