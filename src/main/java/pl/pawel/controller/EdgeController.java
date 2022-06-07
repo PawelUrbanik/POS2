@@ -96,8 +96,7 @@ public class EdgeController {
         {
             return ResponseEntity.badRequest().build();
         }
-
-        //TODO Add method to Edge class
+        
         repository.findById(id).ifPresent(edge -> {edge.updateFrom(toUpdate);});
         logger.info("Update edge: id:"+toUpdate.getId()+", name: "+ toUpdate.getEgdeName());
         return ResponseEntity.noContent().build();

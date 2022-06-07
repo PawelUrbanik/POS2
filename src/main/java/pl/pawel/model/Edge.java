@@ -88,4 +88,14 @@ public class Edge {
                 ", platformNumber=" + platform.getPlatformNumber() +
                 '}';
     }
+
+    /**
+     * Update object
+     * @param toUpdate
+     */
+    public void updateFrom(Edge toUpdate) {
+        setEgdeName(toUpdate.getEgdeName());
+        setPlatform(toUpdate.getPlatform());
+        setTracks(toUpdate.getTracks());
+    }
 }
