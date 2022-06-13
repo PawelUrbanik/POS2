@@ -96,7 +96,7 @@ public class EdgeController {
         {
             return ResponseEntity.badRequest().build();
         }
-        
+
         repository.findById(id).ifPresent(edge -> {edge.updateFrom(toUpdate);});
         logger.info("Update edge: id:"+toUpdate.getId()+", name: "+ toUpdate.getEgdeName());
         return ResponseEntity.noContent().build();
