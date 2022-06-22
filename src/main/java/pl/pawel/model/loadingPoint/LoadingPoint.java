@@ -1,7 +1,8 @@
-package pl.pawel.model;
+package pl.pawel.model.loadingPoint;
+
+import pl.pawel.model.operatingControlPoint.OperatingControlPoint;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Objects;
 
