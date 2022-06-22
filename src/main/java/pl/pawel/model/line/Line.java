@@ -1,4 +1,6 @@
-package pl.pawel.model;
+package pl.pawel.model.line;
+
+import pl.pawel.model.operatingControlPoint.OperatingControlPoint;
 
 import javax.persistence.*;
 import java.util.Objects;

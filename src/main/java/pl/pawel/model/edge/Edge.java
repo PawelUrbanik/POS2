@@ -1,7 +1,9 @@
-package pl.pawel.model;
+package pl.pawel.model.edge;
+
+import pl.pawel.model.platform.Platform;
+import pl.pawel.model.track.Track;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

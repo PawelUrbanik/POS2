@@ -1,4 +1,7 @@
-package pl.pawel.model;
+package pl.pawel.model.platform;
+
+import pl.pawel.model.edge.Edge;
+import pl.pawel.model.operatingControlPoint.OperatingControlPoint;
 
 import javax.persistence.*;
 import java.util.Objects;

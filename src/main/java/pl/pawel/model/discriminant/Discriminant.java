@@ -1,4 +1,4 @@
-package pl.pawel.model;
+package pl.pawel.model.discriminant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

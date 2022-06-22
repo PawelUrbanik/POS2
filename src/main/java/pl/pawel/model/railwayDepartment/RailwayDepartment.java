@@ -1,4 +1,6 @@
-package pl.pawel.model;
+package pl.pawel.model.railwayDepartment;
+
+import pl.pawel.model.operatingControlPoint.OperatingControlPoint;
 
 import javax.persistence.*;
 import java.util.Objects;

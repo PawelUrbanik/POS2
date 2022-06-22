@@ -2,7 +2,7 @@ package pl.pawel.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import pl.pawel.model.LoadingPoint;
+import pl.pawel.model.loadingPoint.LoadingPoint;
 
 @RepositoryRestResource
 public interface LoadingPointRepository extends JpaRepository<LoadingPoint, Long> {
