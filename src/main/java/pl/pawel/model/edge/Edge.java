@@ -36,6 +36,11 @@ public class Edge {
         this.platform = platform;
     }
 
+    public Edge(String egdeName, Platform platform) {
+        this.egdeName = egdeName;
+        this.platform= platform;
+    }
+
     public Long getId() {
         return id;
     }
