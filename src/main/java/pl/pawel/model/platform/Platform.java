@@ -14,7 +14,7 @@ public class Platform {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Integer platformNumber;
+    private String platformNumber;
     private Double height;
     private Double length;
     private boolean requestStop;
@@ -28,7 +28,7 @@ public class Platform {
     public Platform() {
     }
 
-    public Platform(Integer platformNumber, Double height, Double length, boolean requestStop, Set<Edge> edges, OperatingControlPoint operatingControlPoint) {
+    public Platform(String platformNumber, Double height, Double length, boolean requestStop, Set<Edge> edges, OperatingControlPoint operatingControlPoint) {
         this.platformNumber = platformNumber;
         this.height = height;
         this.length = length;
@@ -37,7 +37,7 @@ public class Platform {
         this.operatingControlPoint = operatingControlPoint;
     }
 
-    public Platform(Long id, Integer platformNumber, Double height, Double length, boolean requestStop, Set<Edge> edges, OperatingControlPoint operatingControlPoint) {
+    public Platform(Long id, String platformNumber, Double height, Double length, boolean requestStop, Set<Edge> edges, OperatingControlPoint operatingControlPoint) {
         this.id = id;
         this.platformNumber = platformNumber;
         this.height = height;
@@ -55,11 +55,11 @@ public class Platform {
         this.id = id;
     }
 
-    public Integer getPlatformNumber() {
+    public String getPlatformNumber() {
         return platformNumber;
     }
 
-    public void setPlatformNumber(Integer platformNumber) {
+    public void setPlatformNumber(String platformNumber) {
         this.platformNumber = platformNumber;
     }
 
