@@ -1,7 +1,7 @@
 package pl.pawel.model.edge;
 
 import pl.pawel.model.platform.Platform;
-import pl.pawel.model.track.Track;
+import pl.pawel.track.model.Track;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -34,6 +34,11 @@ public class Edge {
         this.egdeName = egdeName;
         this.tracks = tracks;
         this.platform = platform;
+    }
+
+    public Edge(String egdeName, Platform platform) {
+        this.egdeName = egdeName;
+        this.platform= platform;
     }
 
     public Long getId() {

@@ -1,5 +1,6 @@
-package pl.pawel.model.track;
+package pl.pawel.track.model;
 
+import org.springframework.lang.Nullable;
 import pl.pawel.model.edge.Edge;
 
 import javax.persistence.*;
@@ -15,7 +16,8 @@ public class Track {
     private Integer trackNumber;
     private Double axisKm;
     @ManyToOne
-    @JoinColumn(name = "edge_id", nullable = false)
+    @Nullable
+    @JoinColumn(name = "edge_id", nullable = true)
     private Edge edge;
 
     public Track(Long id, Integer trackNumber, Double axisKm, Edge edge) {
