@@ -3,7 +3,7 @@ package pl.pawel.model.operatingControlPoint;
 import pl.pawel.model.platform.Platform;
 import pl.pawel.model.railwayDepartment.RailwayDepartment;
 import pl.pawel.model.line.Line;
-import pl.pawel.model.discriminant.Discriminant;
+import pl.pawel.discriminant.model.Discriminant;
 import pl.pawel.model.loadingPoint.LoadingPoint;
 
 import javax.persistence.*;
