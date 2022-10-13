@@ -13,7 +13,13 @@ public class DiscirminantDto {
 
     public DiscirminantDto() {
     }
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getShortcut() {
         return shortcut;
     }
@@ -30,11 +36,5 @@ public class DiscirminantDto {
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

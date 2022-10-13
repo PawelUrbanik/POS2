@@ -23,6 +23,7 @@ export class DiscriminantListComponent implements OnInit  {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.discriminantService.getDiscriminant().subscribe(data =>{
+        console.log(data);
         this.dataSource = new MatTableDataSource<Discriminant>(data);
         this.dataSource.paginator = this.paginator;
     });
