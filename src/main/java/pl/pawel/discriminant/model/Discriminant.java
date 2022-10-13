@@ -1,4 +1,4 @@
-package pl.pawel.model.discriminant;
+package pl.pawel.discriminant.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +19,14 @@ public class Discriminant {
         this.description = description;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     public Discriminant() {
     }
 
@@ -32,10 +40,6 @@ public class Discriminant {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override
