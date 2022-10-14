@@ -1,5 +1,6 @@
 package pl.pawel.discriminant.model;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

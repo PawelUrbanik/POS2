@@ -2,7 +2,6 @@ package pl.pawel.discriminant.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
