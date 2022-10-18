@@ -13,14 +13,20 @@ import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { TrackListComponent } from './component/track-list/track-list.component'
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DiscriminantListComponent
+    DiscriminantListComponent,
+    MainLayoutComponent,
+    TrackListComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,10 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     MatTableModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    MatListModule
+
   ],
   providers: [DiscriminantService],
   bootstrap: [AppComponent]
