@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: '**', redirectTo:'/discriminants', pathMatch:'full'}
 ];
 
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
