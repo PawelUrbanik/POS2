@@ -2,7 +2,6 @@ package pl.pawel.model.operatingControlPoint;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import pl.pawel.model.line.Line;
 import pl.pawel.discriminant.model.Discriminant;
 import pl.pawel.model.loadingPoint.LoadingPoint;
