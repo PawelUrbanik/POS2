@@ -125,6 +125,7 @@
                             <version>1.5.2.Final</version>
                         </path>
                         <!-- other annotation processors -->
+
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
