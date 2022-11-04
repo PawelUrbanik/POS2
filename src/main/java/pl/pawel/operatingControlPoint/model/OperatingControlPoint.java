@@ -1,12 +1,12 @@
-package pl.pawel.model.operatingControlPoint;
+package pl.pawel.operatingControlPoint.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.pawel.model.line.Line;
+import pl.pawel.line.model.Line;
 import pl.pawel.discriminant.model.Discriminant;
-import pl.pawel.model.loadingPoint.LoadingPoint;
-import pl.pawel.model.platform.Platform;
-import pl.pawel.model.railwayDepartment.RailwayDepartment;
+import pl.pawel.loadingPoint.model.LoadingPoint;
+import pl.pawel.platform.model.Platform;
+import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
 import javax.persistence.*;
 import java.util.Set;

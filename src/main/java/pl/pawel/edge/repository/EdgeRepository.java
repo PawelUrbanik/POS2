@@ -1,9 +1,9 @@
-package pl.pawel.repository;
+package pl.pawel.edge.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import pl.pawel.model.platform.Platform;
+import pl.pawel.edge.model.Edge;
 
 @RepositoryRestResource
-public interface PlatformRepository extends JpaRepository<Platform, Long> {
+public interface EdgeRepository extends JpaRepository<Edge, Long> {
 }

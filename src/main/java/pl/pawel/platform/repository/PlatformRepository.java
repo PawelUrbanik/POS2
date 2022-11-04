@@ -1,9 +1,9 @@
-package pl.pawel.repository;
+package pl.pawel.platform.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import pl.pawel.model.line.Line;
+import pl.pawel.platform.model.Platform;
 
 @RepositoryRestResource
-public interface LineRepository extends JpaRepository<Line, Long> {
+public interface PlatformRepository extends JpaRepository<Platform, Long> {
 }

@@ -2,8 +2,8 @@ package pl.pawel.track.service;
 
 
 import org.springframework.stereotype.Service;
-import pl.pawel.model.edge.Edge;
-import pl.pawel.repository.EdgeRepository;
+import pl.pawel.edge.model.Edge;
+import pl.pawel.edge.repository.EdgeRepository;
 import pl.pawel.track.model.Track;
 import pl.pawel.track.model.dto.TrackWriteDto;
 import pl.pawel.track.repository.TrackRepository;
