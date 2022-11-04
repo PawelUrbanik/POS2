@@ -3,10 +3,9 @@ package pl.pawel.track.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
-import pl.pawel.model.edge.Edge;
+import pl.pawel.edge.model.Edge;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Data

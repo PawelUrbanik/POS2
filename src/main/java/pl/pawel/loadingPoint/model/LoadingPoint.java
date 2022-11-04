@@ -1,8 +1,8 @@
-package pl.pawel.model.loadingPoint;
+package pl.pawel.loadingPoint.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.pawel.model.operatingControlPoint.OperatingControlPoint;
+import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 
 import javax.persistence.*;
 import java.time.LocalTime;

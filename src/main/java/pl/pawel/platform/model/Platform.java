@@ -1,9 +1,9 @@
-package pl.pawel.model.platform;
+package pl.pawel.platform.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.pawel.model.edge.Edge;
-import pl.pawel.model.operatingControlPoint.OperatingControlPoint;
+import pl.pawel.edge.model.Edge;
+import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 
 import javax.persistence.*;
 import java.util.Set;

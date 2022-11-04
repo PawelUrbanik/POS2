@@ -1,7 +1,7 @@
-package pl.pawel.model.edge.DTO;
+package pl.pawel.edge.model.DTO;
 
-import pl.pawel.model.edge.Edge;
-import pl.pawel.model.platform.Platform;
+import pl.pawel.edge.model.Edge;
+import pl.pawel.platform.model.Platform;
 
 public class EdgeWirteModel {
 

@@ -1,8 +1,8 @@
-package pl.pawel.model.edge;
+package pl.pawel.edge.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.pawel.model.platform.Platform;
+import pl.pawel.platform.model.Platform;
 import pl.pawel.track.model.Track;
 
 import javax.persistence.*;

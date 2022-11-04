@@ -1,4 +1,4 @@
-package pl.pawel.controller;
+package pl.pawel.edge.controller;
 
 
 import org.slf4j.Logger;
@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pawel.model.edge.Edge;
-import pl.pawel.repository.EdgeRepository;
+import pl.pawel.edge.model.Edge;
+import pl.pawel.edge.repository.EdgeRepository;
 
 import javax.validation.Valid;
 import java.util.List;

@@ -1,6 +1,6 @@
-package pl.pawel.model.edge.DTO;
+package pl.pawel.edge.model.DTO;
 
-import pl.pawel.model.platform.Platform;
+import pl.pawel.platform.model.Platform;
 
 public class EdgePlatformReadModel {
 

@@ -1,6 +1,6 @@
-package pl.pawel.model.edge.DTO;
+package pl.pawel.edge.model.DTO;
 
-import pl.pawel.model.edge.Edge;
+import pl.pawel.edge.model.Edge;
 import pl.pawel.track.model.Track;
 
 import java.util.Set;
