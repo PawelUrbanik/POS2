@@ -3,6 +3,8 @@ import { Discriminant } from 'src/app/common/discriminant';
 import { DiscriminantService } from 'src/app/services/discriminant.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+
 
 
 @Component({
@@ -12,7 +14,8 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class DiscriminantListComponent implements OnInit  {
 
-  constructor(private discriminantService: DiscriminantService) { }
+  constructor(private discriminantService: DiscriminantService,
+              public dialog: MatDialog) { }
 
   dataSource = new MatTableDataSource<Discriminant>();
   displayedColumns: string[] = ['id', 'shortcut', 'description'];
@@ -38,5 +41,9 @@ export class DiscriminantListComponent implements OnInit  {
     }
   }
 
+  getElement(row: Discriminant) {
+    console.log(row);
+  }
 
-}
+
+} 

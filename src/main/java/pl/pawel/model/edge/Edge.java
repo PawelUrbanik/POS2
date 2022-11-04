@@ -24,6 +24,11 @@ public class Edge {
     @ManyToOne
     private Platform platform;
 
+    public Edge(String egdeName, Platform platform) {
+        this.egdeName = egdeName;
+        this.platform =platform;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, egdeName, tracks, platform);
