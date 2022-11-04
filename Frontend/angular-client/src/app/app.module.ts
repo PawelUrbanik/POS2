@@ -12,11 +12,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import { TrackListComponent } from './component/track-list/track-list.component'
+import { TrackListComponent } from './component/track-list/track-list.component';
+import { OperatingControlPointListComponent } from './component/operating-control-point-list/operating-control-point-list.component';
 
 
 
@@ -26,6 +29,7 @@ import { TrackListComponent } from './component/track-list/track-list.component'
     DiscriminantListComponent,
     MainLayoutComponent,
     TrackListComponent,
+    OperatingControlPointListComponent,
 
   ],
   imports: [
@@ -39,7 +43,8 @@ import { TrackListComponent } from './component/track-list/track-list.component'
     MatFormFieldModule,
     MatInputModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
 
   ],
   providers: [DiscriminantService],
