@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Discriminant } from '../common/discriminant';
+import { Discriminant } from './discriminant';
 
 @Injectable({
   providedIn: 'root'
