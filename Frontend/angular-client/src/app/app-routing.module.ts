@@ -7,11 +7,31 @@ import {
 import {TrackComponent} from "./feature/track/track/track.component";
 
 const routes: Routes = [
-  {path: 'discriminants', component: DiscriminantComponent},
-  {path: 'tracks', component: TrackComponent},
-  {path: 'operatingPoints', component: OperatingControlPointComponent},
-  {path: '', redirectTo:'/discriminants', pathMatch:'full'},
-  {path: '**', redirectTo:'/discriminants', pathMatch:'full'}
+  {
+    path: 'discriminants',
+    component: DiscriminantComponent,
+    title: 'Discriminants'
+  },
+  {
+    path: 'tracks',
+    component: TrackComponent,
+    title: 'Tracks'
+  },
+  {
+    path: 'operatingPoints',
+    component: OperatingControlPointComponent,
+    title: 'Control Points'
+  },
+  {
+    path: '',
+    redirectTo: '/discriminants',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '/discriminants',
+    pathMatch: 'full'
+  }
 ];
 
 
@@ -19,4 +39,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
