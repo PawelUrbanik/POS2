@@ -10,6 +10,8 @@ import {MainLayoutComponent} from './layout/main-layout/main-layout.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {FeatureModule} from "./feature/feature.module";
+import {FormlyModule} from "@ngx-formly/core";
+import {FormlyMaterialModule} from "@ngx-formly/material";
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import {FeatureModule} from "./feature/feature.module";
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule,
 
     FeatureModule
 

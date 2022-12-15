@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Discriminant } from 'src/app/feature/discriminant/discriminant';
 import { DiscriminantService } from 'src/app/feature/discriminant/discriminant.service';
 import {MatPaginator} from '@angular/material/paginator';
@@ -46,7 +46,7 @@ export class DiscriminantListComponent implements OnInit  {
     const formDialog = this.dialog.open(DiscriminantFormComponent,
       {
         data: {
-          data: row
+          model: row
         }
       })
   }
