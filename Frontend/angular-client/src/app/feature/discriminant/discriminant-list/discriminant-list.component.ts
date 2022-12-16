@@ -42,13 +42,14 @@ export class DiscriminantListComponent implements OnInit  {
   }
 
   getElement(row: Discriminant) {
-    console.log(row);
     const formDialog = this.dialog.open(DiscriminantFormComponent,
       {
         data: {
           model: row
         }
       })
+
+    formDialog.afterClosed().subscribe(value => console.log(value))
   }
 
 
