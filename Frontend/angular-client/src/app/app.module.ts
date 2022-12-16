@@ -12,6 +12,7 @@ import {MatListModule} from '@angular/material/list';
 import {FeatureModule} from "./feature/feature.module";
 import {FormlyModule} from "@ngx-formly/core";
 import {FormlyMaterialModule} from "@ngx-formly/material";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {FormlyMaterialModule} from "@ngx-formly/material";
     MatListModule,
     FormlyModule.forRoot(),
     FormlyMaterialModule,
+    MatIconModule,
 
     FeatureModule
 
