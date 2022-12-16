@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TrackWriteDto {
 
-    private Integer trackNumber;
+    private String trackNumber;
     private Double axisKm;
     private Long EdgeId;
 }

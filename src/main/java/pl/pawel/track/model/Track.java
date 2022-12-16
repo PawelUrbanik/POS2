@@ -15,7 +15,7 @@ public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Integer trackNumber;
+    private String trackNumber;
     private Double axisKm;
     @ManyToOne
     @Nullable
