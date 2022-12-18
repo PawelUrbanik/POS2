@@ -12,8 +12,8 @@ import java.util.List;
 @Service
 public class DiscriminantServiceImpl implements DiscriminantService{
 
-    private DisciminantRepository disciminantRepository;
-    private DiscriminantMapper discriminantMapper;
+    private final DisciminantRepository disciminantRepository;
+    private final DiscriminantMapper discriminantMapper;
 
     public DiscriminantServiceImpl(DisciminantRepository disciminantRepository, DiscriminantMapper discriminantMapper) {
         this.disciminantRepository = disciminantRepository;
@@ -27,4 +27,20 @@ public class DiscriminantServiceImpl implements DiscriminantService{
         discriminantList.forEach(discriminant -> discirminantDtos.add(discriminantMapper.disciminantToDiscriminantDto(discriminant)));
         return discirminantDtos;
     }
+
+    @Override
+    public DiscirminantDto updateDiscriminant(DiscirminantDto dtoToUpdate) {
+
+        final Discriminant discriminantToUpdate = discriminantMapper.discriminantDtoToDiscriminant(dtoToUpdate);
+        final Discriminant discriminantFromDB = disciminantRepository.getById(discriminantToUpdate.getId());
+        if (discriminantToUpdate.getId().equals(discriminantFromDB.getId())) {
+            final Discriminant discriminant = disciminantRepository.save(discriminantToUpdate);
+            return discriminantMapper.disciminantToDiscriminantDto(discriminant);
+        } else {
+            throw new IllegalArgumentException();
+        }
+
+    }
+
+
 }

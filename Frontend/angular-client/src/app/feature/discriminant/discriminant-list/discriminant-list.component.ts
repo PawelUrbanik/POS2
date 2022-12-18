@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Discriminant } from 'src/app/feature/discriminant/discriminant';
-import { DiscriminantService } from 'src/app/feature/discriminant/discriminant.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Discriminant} from 'src/app/feature/discriminant/discriminant';
+import {DiscriminantService} from 'src/app/feature/discriminant/discriminant.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {DiscriminantFormComponent} from "../discriminant-form/discriminant-form.component";
-
 
 
 @Component({
@@ -13,10 +12,11 @@ import {DiscriminantFormComponent} from "../discriminant-form/discriminant-form.
   templateUrl: './discriminant-list.component.html',
   styleUrls: ['./discriminant-list.component.css']
 })
-export class DiscriminantListComponent implements OnInit  {
+export class DiscriminantListComponent implements OnInit {
 
   constructor(private discriminantService: DiscriminantService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) {
+  }
 
   dataSource = new MatTableDataSource<Discriminant>();
   displayedColumns: string[] = ['id', 'shortcut', 'description'];
@@ -25,11 +25,7 @@ export class DiscriminantListComponent implements OnInit  {
 
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.discriminantService.getDiscriminant().subscribe(data =>{
-        this.dataSource = new MatTableDataSource<Discriminant>(data);
-        this.dataSource.paginator = this.paginator;
-    });
+    this.updateTable();
   }
 
   applyFilter(event: Event) {
@@ -49,7 +45,19 @@ export class DiscriminantListComponent implements OnInit  {
         }
       })
 
-    formDialog.afterClosed().subscribe(value => console.log(value))
+    formDialog.afterClosed().subscribe(
+      value => {
+        this.updateTable();
+      })
+  }
+
+  updateTable() {
+    this.discriminantService.getDiscriminant().subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource<Discriminant>(data);
+        this.dataSource.paginator = this.paginator;
+      }
+    );
   }
 
 

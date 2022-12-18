@@ -15,4 +15,9 @@ export class DiscriminantService {
   getDiscriminant(): Observable<Discriminant[]> {
     return this.httpClient.get<Discriminant[]>(DISCRIMINANT_URL);
   }
+
+  updateDiscriminant(discriminant: Discriminant) {
+    let response = this.httpClient.put(DISCRIMINANT_URL + '/' + discriminant.id, discriminant);
+    response.subscribe()
+  }
 }

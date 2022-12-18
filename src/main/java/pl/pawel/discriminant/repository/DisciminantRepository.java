@@ -7,4 +7,8 @@ import java.util.List;
 public interface DisciminantRepository {
 
     List<Discriminant> findAll();
+
+    Discriminant save(Discriminant discriminant);
+
+    Discriminant getById(Long id);
 }

@@ -3,6 +3,7 @@ import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {Discriminant} from "../discriminant";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {DiscriminantService} from "../discriminant.service";
 
 @Component({
   selector: 'app-discriminant-form',
@@ -13,10 +14,12 @@ export class DiscriminantFormComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public inputData: any,
-    private dialogRef: MatDialogRef<DiscriminantFormComponent>
+    private dialogRef: MatDialogRef<DiscriminantFormComponent>,
+    private discriminantService: DiscriminantService
   ) {
-    this.model = inputData.model;
+    this.model = structuredClone(inputData.model);
   }
+
   form = new FormGroup({});
 
   model!: Discriminant;
@@ -53,12 +56,9 @@ export class DiscriminantFormComponent {
     },
   ];
 
-  onSubmit(model: Object) {
-    console.log(model);
+  onSubmit() {
+    this.discriminantService.updateDiscriminant(this.model);
     this.dialogRef.close(this.model);
-  }
-  close(){
-    this.dialogRef.close();
   }
 
 }
