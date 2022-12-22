@@ -60,5 +60,14 @@ export class DiscriminantListComponent implements OnInit {
     );
   }
 
+  create() {
+    const dialogRef = this.dialog.open(DiscriminantFormComponent, {
+      data: {
+        model: new Discriminant(undefined, '', '')
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(()=> this.updateTable());
+  }
 
 }

@@ -11,4 +11,7 @@ public interface DisciminantRepository {
     Discriminant save(Discriminant discriminant);
 
     Discriminant getById(Long id);
+
+    boolean existsByShortcut(String shortcut);
 }
+

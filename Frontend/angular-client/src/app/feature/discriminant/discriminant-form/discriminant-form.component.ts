@@ -17,7 +17,7 @@ export class DiscriminantFormComponent {
     private dialogRef: MatDialogRef<DiscriminantFormComponent>,
     private discriminantService: DiscriminantService
   ) {
-    this.model = structuredClone(inputData.model);
+    if (this.inputData)this.model = structuredClone(inputData.model);
   }
 
   form = new FormGroup({});
@@ -30,7 +30,6 @@ export class DiscriminantFormComponent {
       props: {
         label: 'ID',
         placeholder: 'Id',
-        required: true,
         readonly: true
       }
     },
@@ -57,7 +56,12 @@ export class DiscriminantFormComponent {
   ];
 
   onSubmit() {
-    this.discriminantService.updateDiscriminant(this.model);
+
+    if (typeof(this.model.id) !== 'undefined') {
+      this.discriminantService.updateDiscriminant(this.model);
+    } else {
+      this.discriminantService.createDiscriminant(this.model);
+    }
     this.dialogRef.close(this.model);
   }
 

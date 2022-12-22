@@ -11,4 +11,6 @@ public interface DiscriminantService {
 
     DiscirminantDto updateDiscriminant(DiscirminantDto dtoToUpdate);
 
+    DiscirminantDto createNewDiscriminant(DiscirminantDto dtoToSave);
+
 }

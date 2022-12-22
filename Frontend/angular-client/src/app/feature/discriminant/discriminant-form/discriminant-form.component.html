@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>Discriminant</h2>
 <mat-dialog-content>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-    <button mat-raised-button type="submit" color="primary" (click)="onSubmit()" class="mx-2">Save changes</button>
-    <button mat-raised-button color="warn" mat-dialog-close class="mx-2">Discard changes</button>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onSubmit()" class="mx-2">Save changes</button>
+  <button mat-raised-button color="warn" mat-dialog-close class="mx-2">Discard changes</button>
 </mat-dialog-actions>
 

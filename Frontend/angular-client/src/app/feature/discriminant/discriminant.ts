@@ -1,9 +1,9 @@
 export class Discriminant {
 
     constructor(
-        public id: number,
-        public shortcut: string, 
-        public desciption: string) {
-            
+        public id: number | undefined,
+        public shortcut: string,
+        public description: string) {
+
         }
 }

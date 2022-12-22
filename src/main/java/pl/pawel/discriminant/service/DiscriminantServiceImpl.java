@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DiscriminantServiceImpl implements DiscriminantService{
+public class DiscriminantServiceImpl implements DiscriminantService {
 
     private final DisciminantRepository disciminantRepository;
     private final DiscriminantMapper discriminantMapper;
@@ -34,13 +34,23 @@ public class DiscriminantServiceImpl implements DiscriminantService{
         final Discriminant discriminantToUpdate = discriminantMapper.discriminantDtoToDiscriminant(dtoToUpdate);
         final Discriminant discriminantFromDB = disciminantRepository.getById(discriminantToUpdate.getId());
         if (discriminantToUpdate.getId().equals(discriminantFromDB.getId())) {
+            discriminantToUpdate.setShortcut(discriminantToUpdate.getShortcut().toUpperCase());
             final Discriminant discriminant = disciminantRepository.save(discriminantToUpdate);
             return discriminantMapper.disciminantToDiscriminantDto(discriminant);
         } else {
             throw new IllegalArgumentException();
         }
-
     }
 
+    @Override
+    public DiscirminantDto createNewDiscriminant(DiscirminantDto dtoToSave) {
 
+        if (!disciminantRepository.existsByShortcut(dtoToSave.getShortcut())) {
+            dtoToSave.setShortcut(dtoToSave.getShortcut().toUpperCase());
+            final Discriminant savedDiscriminant = disciminantRepository.save(discriminantMapper.discriminantDtoToDiscriminant(dtoToSave));
+            return discriminantMapper.disciminantToDiscriminantDto(savedDiscriminant);
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
 }

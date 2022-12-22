@@ -17,7 +17,10 @@ export class DiscriminantService {
   }
 
   updateDiscriminant(discriminant: Discriminant) {
-    let response = this.httpClient.put(DISCRIMINANT_URL + '/' + discriminant.id, discriminant);
-    response.subscribe()
+   this.httpClient.put(DISCRIMINANT_URL + '/' + discriminant.id, discriminant).subscribe();
+  }
+
+  createDiscriminant(discriminant: Discriminant) {
+    this.httpClient.post(DISCRIMINANT_URL , discriminant).subscribe();
   }
 }

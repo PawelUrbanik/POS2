@@ -6,4 +6,6 @@ import pl.pawel.discriminant.model.Discriminant;
 
 @Repository
 public interface DiscriminantRrepoSQL extends DisciminantRepository, JpaRepository<Discriminant, Long> {
+
+    boolean existsByShortcut(String shortcut);
 }

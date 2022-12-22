@@ -1,5 +1,6 @@
 package pl.pawel.discriminant;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.pawel.discriminant.model.DiscirminantDto;
@@ -43,4 +44,16 @@ public class DiscriminantController {
         }
 
     }
+
+    @PostMapping
+    public ResponseEntity<?> addDiscriminant(@RequestBody @Valid DiscirminantDto dto) {
+
+        try {
+            discriminantService.createNewDiscriminant(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
+    }
+
 }
