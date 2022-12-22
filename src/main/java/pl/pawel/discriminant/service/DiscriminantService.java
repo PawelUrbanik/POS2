@@ -13,4 +13,6 @@ public interface DiscriminantService {
 
     DiscirminantDto createNewDiscriminant(DiscirminantDto dtoToSave);
 
+    void deleteById(Long id);
+
 }

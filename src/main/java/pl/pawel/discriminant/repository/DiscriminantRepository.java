@@ -4,7 +4,7 @@ import pl.pawel.discriminant.model.Discriminant;
 
 import java.util.List;
 
-public interface DisciminantRepository {
+public interface DiscriminantRepository {
 
     List<Discriminant> findAll();
 
@@ -13,5 +13,9 @@ public interface DisciminantRepository {
     Discriminant getById(Long id);
 
     boolean existsByShortcut(String shortcut);
+
+    void deleteById(Long id);
+
+    boolean existsById(Long id);
 }
 

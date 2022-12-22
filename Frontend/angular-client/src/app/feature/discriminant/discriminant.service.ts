@@ -23,4 +23,8 @@ export class DiscriminantService {
   createDiscriminant(discriminant: Discriminant) {
     this.httpClient.post(DISCRIMINANT_URL , discriminant).subscribe();
   }
+
+  deleteDiscriminant(id: number| undefined) {
+    this.httpClient.delete(DISCRIMINANT_URL+'/'+id , {}).subscribe();
+  }
 }

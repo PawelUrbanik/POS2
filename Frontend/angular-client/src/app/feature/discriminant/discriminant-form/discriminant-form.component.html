@@ -5,7 +5,8 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="onSubmit()" class="mx-2">Save changes</button>
-  <button mat-raised-button color="warn" mat-dialog-close class="mx-2">Discard changes</button>
+  <button mat-stroked-button color="primary" (click)="onSubmit()" class="mx-2">Save</button>
+  <button mat-stroked-button mat-dialog-close class="mx-2">Discard</button>
+  <button mat-raised-button [hidden] = "!canDelete()" color="warn" class="mx-2" (click)="deleteDiscriminant()">Delete</button>
 </mat-dialog-actions>
 

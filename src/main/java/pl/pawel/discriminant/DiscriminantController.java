@@ -56,4 +56,14 @@ public class DiscriminantController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteDiscriminat(@PathVariable Long id) {
+        try {
+            discriminantService.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

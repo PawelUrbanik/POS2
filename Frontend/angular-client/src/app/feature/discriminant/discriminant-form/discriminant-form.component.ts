@@ -65,4 +65,13 @@ export class DiscriminantFormComponent {
     this.dialogRef.close(this.model);
   }
 
+  canDelete(): boolean {
+    return typeof(this.model.id) !== 'undefined';
+  }
+
+  deleteDiscriminant(): void{
+    this.discriminantService.deleteDiscriminant(this.model.id);
+    this.dialogRef.close(this.model);
+  }
+
 }
