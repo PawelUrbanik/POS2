@@ -40,27 +40,34 @@ export class DiscriminantFormComponent {
         label: 'shortcut',
         placeholder: 'shortcut',
         required: true,
-        readonly: false
+        readonly: false,
+        maxLength: 4
+      },
+      validators: {
+          validation: ['onlyLetters']
       }
     },
     {
       key: 'description',
       type: 'input',
       props: {
-        label: 'desciption',
-        placeholder: 'desciption',
+        label: 'description',
+        placeholder: 'description',
         required: true,
-        readonly: false
+        readonly: false,
+        maxLength: 255
       }
     },
   ];
 
   onSubmit() {
-
-    if (typeof(this.model.id) !== 'undefined') {
-      this.discriminantService.updateDiscriminant(this.model);
-    } else {
-      this.discriminantService.createDiscriminant(this.model);
+    if (this.form.valid) {
+      this.dialogRef.close(this.model);
+      if (typeof (this.model.id) !== 'undefined') {
+        this.discriminantService.updateDiscriminant(this.model);
+      } else {
+        this.discriminantService.createDiscriminant(this.model);
+      }
     }
     this.dialogRef.close(this.model);
   }
@@ -69,7 +76,7 @@ export class DiscriminantFormComponent {
     return typeof(this.model.id) !== 'undefined';
   }
 
-  deleteDiscriminant(): void{
+  deleteDiscriminant(): void {
     this.discriminantService.deleteDiscriminant(this.model.id);
     this.dialogRef.close(this.model);
   }

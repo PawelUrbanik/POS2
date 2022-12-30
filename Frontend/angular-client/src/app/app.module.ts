@@ -13,6 +13,7 @@ import {FeatureModule} from "./feature/feature.module";
 import {FormlyModule} from "@ngx-formly/core";
 import {FormlyMaterialModule} from "@ngx-formly/material";
 import {MatIconModule} from "@angular/material/icon";
+import {FORM_CONFIG} from "./core/form-config";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import {MatIconModule} from "@angular/material/icon";
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
-    FormlyModule.forRoot(),
+    FormlyModule.forRoot(FORM_CONFIG),
     FormlyMaterialModule,
     MatIconModule,
 
