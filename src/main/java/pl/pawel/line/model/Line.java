@@ -3,6 +3,7 @@ package pl.pawel.line.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
+import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -21,4 +22,7 @@ public class Line {
     private Double endKm;
     @OneToMany(mappedBy = "line")
     private Set<OperatingControlPoint> controlPoints;
+
+    @ManyToMany(mappedBy = "lines")
+    private Set<RailwayDepartment> departments;
 }
