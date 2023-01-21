@@ -5,6 +5,7 @@ import {
   OperatingControlPointComponent
 } from "./feature/operating-control-point/operating-control-point/operating-control-point.component";
 import {TrackComponent} from "./feature/track/track/track.component";
+import {DepartmentComponent} from "./feature/department/department/department.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
     path: 'operatingPoints',
     component: OperatingControlPointComponent,
     title: 'Control Points'
+  },
+  {
+    path: 'departments',
+    component: DepartmentComponent,
+    title: 'Departments'
   },
   {
     path: '',

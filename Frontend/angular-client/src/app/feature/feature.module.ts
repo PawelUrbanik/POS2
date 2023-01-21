@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {DiscriminantModule} from "./discriminant/discriminant.module";
 import {OperatingControlPointModule} from "./operating-control-point/operating-control-point.module";
 import {TrackModule} from "./track/track.module";
+import {DepartmentModule} from "./department/department.module";
 
 
 
@@ -12,7 +13,8 @@ import {TrackModule} from "./track/track.module";
     CommonModule,
     DiscriminantModule,
     OperatingControlPointModule,
-    TrackModule
+    TrackModule,
+    DepartmentModule
   ]
 })
 export class FeatureModule { }
