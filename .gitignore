@@ -86,7 +86,7 @@ fabric.properties
 
 # *.iml
 # modules.xml
-# .idea/misc.xml
+ .idea/misc.xml
 # *.ipr
 
 # Sonarlint plugin
@@ -152,6 +152,7 @@ buildNumber.properties
 POS2.iml
 POSDB.mv.db
 POSDB.trace.db
+POSDB.lock.db
 
 # Eclipse m2e generated files
 # Eclipse Core
@@ -163,3 +164,8 @@ POSDB.trace.db
 
 #Angular
 /POSDB.lock.db
+
+.idea/jpa-buddy.xml
+.idea/inspectionProfiles
+.idea/sqldialects.xml
+.idea/*
