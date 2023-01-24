@@ -19,6 +19,8 @@ public class OperatingControlPoint {
     private Long id;
     private String pointName;
     private Boolean loadingPoint;
+    private Double axisKm;
+    private Boolean otherManager;
     @OneToMany(mappedBy = "operatingControlPoint")
     private Set<Platform> platforms;
     @OneToOne
