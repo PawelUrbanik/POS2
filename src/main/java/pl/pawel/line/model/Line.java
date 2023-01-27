@@ -20,7 +20,12 @@ public class Line {
     private String lineName;
     private Double startKm;
     private Double endKm;
-    @OneToMany(mappedBy = "line")
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "lines_points",
+            joinColumns = @JoinColumn(name = "line_id"),
+            inverseJoinColumns = @JoinColumn(name = "point_id")
+    )
     private Set<OperatingControlPoint> controlPoints;
 
     @ManyToMany(mappedBy = "lines")

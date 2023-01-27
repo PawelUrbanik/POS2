@@ -27,6 +27,6 @@ public class OperatingControlPoint {
     private Discriminant discriminant;
     @ManyToOne
     private RailwayDepartment railwayDepartment;
-    @ManyToOne
-    private Line line;
+    @ManyToMany
+    private Set<Line> lines;
 }
