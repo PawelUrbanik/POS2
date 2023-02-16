@@ -19,7 +19,7 @@ public class OperatingControlPoint {
     private Long id;
     private String pointName;
     private Boolean loadingPoint;
-    private Double axisKm;
+//    private Double axisKm;
     private Boolean otherManager;
     @OneToMany(mappedBy = "operatingControlPoint")
     private Set<Platform> platforms;
@@ -27,6 +27,11 @@ public class OperatingControlPoint {
     private Discriminant discriminant;
     @ManyToOne
     private RailwayDepartment railwayDepartment;
-    @ManyToMany
-    private Set<Line> lines;
+    @OneToMany(
+            mappedBy = "operatingControlPoint",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private Set<LinesAxisKm> lines;
 }

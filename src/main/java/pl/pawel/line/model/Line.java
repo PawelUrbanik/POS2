@@ -2,6 +2,7 @@ package pl.pawel.line.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.pawel.operatingControlPoint.model.LinesAxisKm;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
@@ -20,13 +21,13 @@ public class Line {
     private String lineName;
     private Double startKm;
     private Double endKm;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "lines_points",
-            joinColumns = @JoinColumn(name = "line_id"),
-            inverseJoinColumns = @JoinColumn(name = "point_id")
+    @OneToMany(
+            mappedBy = "line",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
     )
-    private Set<OperatingControlPoint> controlPoints;
+    private Set<LinesAxisKm> controlPointsAxisKm;
 
     @ManyToMany(mappedBy = "lines")
     private Set<RailwayDepartment> departments;
