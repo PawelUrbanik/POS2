@@ -1,7 +1,8 @@
 package pl.pawel.edge.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pawel.platform.model.Platform;
 import pl.pawel.track.model.Track;
 
@@ -10,7 +11,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Edge {
 

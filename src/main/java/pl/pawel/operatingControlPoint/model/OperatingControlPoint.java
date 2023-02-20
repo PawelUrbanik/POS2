@@ -1,9 +1,9 @@
 package pl.pawel.operatingControlPoint.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pawel.discriminant.model.Discriminant;
-import pl.pawel.line.model.Line;
 import pl.pawel.platform.model.Platform;
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
@@ -11,7 +11,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class OperatingControlPoint {
     @Id
@@ -19,7 +20,6 @@ public class OperatingControlPoint {
     private Long id;
     private String pointName;
     private Boolean loadingPoint;
-//    private Double axisKm;
     private Boolean otherManager;
     @OneToMany(mappedBy = "operatingControlPoint")
     private Set<Platform> platforms;

@@ -1,16 +1,17 @@
 package pl.pawel.line.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pawel.operatingControlPoint.model.LinesAxisKm;
-import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Line {
 

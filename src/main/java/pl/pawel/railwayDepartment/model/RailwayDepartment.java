@@ -1,7 +1,8 @@
 package pl.pawel.railwayDepartment.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pawel.line.model.Line;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 
@@ -9,7 +10,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class RailwayDepartment {
 
