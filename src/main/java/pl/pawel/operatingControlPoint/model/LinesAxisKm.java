@@ -6,11 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.pawel.line.model.Line;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -36,4 +34,17 @@ public class LinesAxisKm implements Serializable {
             referencedColumnName = "id"
     )
     private OperatingControlPoint operatingControlPoint;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LinesAxisKm that = (LinesAxisKm) o;
+        return Objects.equals(line, that.line) && Objects.equals(axisKm, that.axisKm) && Objects.equals(operatingControlPoint, that.operatingControlPoint);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(line, axisKm, operatingControlPoint);
+    }
 }

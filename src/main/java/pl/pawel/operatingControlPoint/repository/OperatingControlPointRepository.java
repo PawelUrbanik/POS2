@@ -1,9 +1,10 @@
 package pl.pawel.operatingControlPoint.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 
-@RepositoryRestResource
-public interface OperatingControlPointRepository extends JpaRepository<OperatingControlPoint, Long> {
+public interface OperatingControlPointRepository {
+
+    Page<OperatingControlPoint> findAll(Pageable pageable);
 }

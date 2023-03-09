@@ -22,8 +22,13 @@ public class Platform {
     private Double height;
     private Double length;
     private boolean requestStop;
-    @OneToMany(mappedBy = "platform")
+    @OneToMany(mappedBy = "platform", fetch = FetchType.LAZY)
     private Set<Edge> edges;
     @ManyToOne
+    @JoinColumn(
+            name = "operating_control_point_id",
+            nullable = false,
+            referencedColumnName = "id"
+    )
     private OperatingControlPoint operatingControlPoint;
 }
