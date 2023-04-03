@@ -1,0 +1,10 @@
+table {
+  width: 100%;
+}
+.table-div{
+  margin: 20px;
+}
+.points-table tr:hover{
+  background: whitesmoke;
+  cursor: pointer;
+}

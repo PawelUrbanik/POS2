@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {OperatingControlPointService} from "../operating-control-point.service";
 
 @Component({
   selector: 'app-operating-control-point',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OperatingControlPointComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private service: OperatingControlPointService) { }
 
   ngOnInit(): void {
   }
+
 
 }
