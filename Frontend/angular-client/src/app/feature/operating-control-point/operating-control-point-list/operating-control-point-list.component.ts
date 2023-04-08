@@ -1,16 +1,21 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {OperatingControlPointRowDto} from "../operating-control-point.model";
 import {OperatingControlPointService} from "../operating-control-point.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {OperatingControlPointDatasource} from "./operating-control-point-datasource";
+import {MatPaginator} from "@angular/material/paginator";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'operating-control-point-list',
   templateUrl: './operating-control-point-list.component.html',
   styleUrls: ['./operating-control-point-list.component.css']
 })
-export class OperatingControlPointListComponent implements OnInit {
+export class OperatingControlPointListComponent implements OnInit, AfterViewInit {
 
-  @Input() dataSource = new MatTableDataSource<OperatingControlPointRowDto>();
+  dataSource: OperatingControlPointDatasource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
     private service: OperatingControlPointService
   ) { }
@@ -26,15 +31,24 @@ export class OperatingControlPointListComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    this.updateTable();
+    this.dataSource = new OperatingControlPointDatasource(this.service);
+    this.dataSource.loadPoints('', 'desc', 0 , 3);
   }
 
-  private updateTable() {
-    this.service.getPage(0,10).subscribe(
-      response => {
-        this.dataSource = new MatTableDataSource(response.content);
-      }
-    )
-    this.dataSource.connect().subscribe();
+  ngAfterViewInit() {
+    this.paginator.page
+      .pipe(
+        tap(() => this.loadPointsPage())
+      )
+      .subscribe();
   }
+
+  loadPointsPage() {
+    this.dataSource.loadPoints(
+      '',
+      'asc',
+      this.paginator.pageIndex,
+      this.paginator.pageSize);
+  }
+
 }
