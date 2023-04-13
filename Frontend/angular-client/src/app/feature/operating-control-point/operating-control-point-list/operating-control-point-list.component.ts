@@ -1,7 +1,5 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {OperatingControlPointRowDto} from "../operating-control-point.model";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {OperatingControlPointService} from "../operating-control-point.service";
-import {MatTableDataSource} from "@angular/material/table";
 import {OperatingControlPointDatasource} from "./operating-control-point-datasource";
 import {MatPaginator} from "@angular/material/paginator";
 import {tap} from "rxjs/operators";
@@ -32,7 +30,7 @@ export class OperatingControlPointListComponent implements OnInit, AfterViewInit
 
   ngOnInit(): void {
     this.dataSource = new OperatingControlPointDatasource(this.service);
-    this.dataSource.loadPoints('', 'desc', 0 , 3);
+    this.dataSource.loadPoints('', 'desc', 0 , 10);
   }
 
   ngAfterViewInit() {

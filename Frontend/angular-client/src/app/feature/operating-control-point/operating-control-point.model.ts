@@ -7,3 +7,8 @@ export interface OperatingControlPointRowDto {
   discriminant: string;
   railwayDepartment: string;
 }
+
+export interface OperatingControlPointResponse {
+  content: OperatingControlPointRowDto[];
+  totalElements: number;
+}
