@@ -14,6 +14,7 @@ import {FormlyModule} from "@ngx-formly/core";
 import {FormlyMaterialModule} from "@ngx-formly/material";
 import {MatIconModule} from "@angular/material/icon";
 import {FORM_CONFIG} from "./core/form-config";
+import {CoreModule} from "./core/core.module";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {FORM_CONFIG} from "./core/form-config";
     FormlyMaterialModule,
     MatIconModule,
 
-    FeatureModule
+    FeatureModule,
+    CoreModule
 
 
   ],

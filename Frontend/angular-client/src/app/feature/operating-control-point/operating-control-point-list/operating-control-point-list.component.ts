@@ -3,6 +3,11 @@ import {OperatingControlPointService} from "../operating-control-point.service";
 import {OperatingControlPointDatasource} from "./operating-control-point-datasource";
 import {MatPaginator} from "@angular/material/paginator";
 import {tap} from "rxjs/operators";
+import {Discriminant} from "../../discriminant/discriminant";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  OperatingControlPointFormComponent
+} from "../operating-control-point-form/operating-control-point-form.component";
 
 @Component({
   selector: 'operating-control-point-list',
@@ -15,7 +20,8 @@ export class OperatingControlPointListComponent implements OnInit, AfterViewInit
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private service: OperatingControlPointService
+    private service: OperatingControlPointService,
+    private dialog: MatDialog
   ) { }
 
   displayedColumns = [
@@ -47,6 +53,20 @@ export class OperatingControlPointListComponent implements OnInit, AfterViewInit
       'asc',
       this.paginator.pageIndex,
       this.paginator.pageSize);
+  }
+
+  getElement(row: Discriminant) {
+    const formDialog = this.dialog.open(OperatingControlPointFormComponent,
+      {
+        data: {
+          model: row
+        }
+      })
+
+    formDialog.afterClosed().subscribe(
+      value => {
+        this.loadPointsPage();
+      })
   }
 
 }

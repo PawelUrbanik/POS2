@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Operating control point: {{model.pointName}}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button color="primary" (click)="onSubmit()" class="mx-2">Save</button>
+  <button mat-stroked-button mat-dialog-close class="mx-2">Discard</button>
+  <button mat-raised-button [hidden] = "!canDelete()" color="warn" class="mx-2" (click)="deleteDiscriminant()">Delete</button>
+</mat-dialog-actions>
+
