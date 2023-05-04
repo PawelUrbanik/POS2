@@ -8,6 +8,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {
   OperatingControlPointFormComponent
 } from "../operating-control-point-form/operating-control-point-form.component";
+import {DiscriminantFormComponent} from "../../discriminant/discriminant-form/discriminant-form.component";
+import {OperatingControlPointRowDto} from "../operating-control-point.model";
 
 @Component({
   selector: 'operating-control-point-list',
@@ -68,5 +70,22 @@ export class OperatingControlPointListComponent implements OnInit, AfterViewInit
         this.loadPointsPage();
       })
   }
+
+  create() {
+    const dialogRef = this.dialog.open(OperatingControlPointFormComponent,
+      {
+        data: {
+          model: new OperatingControlPointRowDto()
+        }
+      });
+
+    dialogRef.afterClosed().subscribe(
+      value => {
+        this.loadPointsPage();
+      }
+    )
+
+  }
+
 
 }

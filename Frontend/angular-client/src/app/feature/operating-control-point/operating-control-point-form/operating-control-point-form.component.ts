@@ -97,9 +97,9 @@ export class OperatingControlPointFormComponent {
     if (this.form.valid) {
       this.dialogRef.close(this.model);
       if (typeof (this.model.id) !== 'undefined') {
-        // this.operatingControlPointService.update(this.model);
+        this.operatingControlPointService.update(this.model);
       } else {
-        // this.operatingControlPointService.create(this.model);
+        this.operatingControlPointService.create(this.model);
       }
     }
     this.dialogRef.close(this.model);
@@ -109,8 +109,8 @@ export class OperatingControlPointFormComponent {
     return typeof(this.model.id) !== 'undefined';
   }
 
-  deleteDiscriminant(): void {
-    // this.operatingControlPointService.delete(this.model.id);
+  delete(): void {
+    this.operatingControlPointService.delete(this.model.id);
     this.dialogRef.close(this.model);
   }
 

@@ -1,4 +1,4 @@
-export interface OperatingControlPointRowDto {
+export class OperatingControlPointRowDto {
   id: number;
   pointName: string;
   loadingPoint: boolean;
