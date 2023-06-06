@@ -17,5 +17,6 @@ public interface OperatingControlPointMapper {
     @Mapping(target = "railwayDepartment", source = "entity.railwayDepartment.name")
     @Mapping(target = "discriminant", source = "entity.discriminant.shortcut")
     @Mapping(target = "numberOfPlatforms", source = "numberOfPlatforms")
-    OperatingControlPointRowDto entityToRowDto(OperatingControlPoint entity, Integer numberOfPlatforms);
+    @Mapping(target = "numberOfLines", source = "numberOfLines")
+    OperatingControlPointRowDto entityToRowDto(OperatingControlPoint entity, Integer numberOfPlatforms, Integer numberOfLines);
 }

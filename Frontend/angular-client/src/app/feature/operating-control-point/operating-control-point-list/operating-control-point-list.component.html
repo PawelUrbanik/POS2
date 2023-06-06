@@ -34,6 +34,11 @@
         <td mat-cell *matCellDef="let element">{{element.numberOfPlatforms}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="numberOfLines">
+        <th mat-header-cell *matHeaderCellDef>Liczba linii</th>
+        <td mat-cell *matCellDef="let element">{{element.numberOfLines}}</td>
+      </ng-container>
+
       <ng-container matColumnDef="discriminant">
         <th mat-header-cell *matHeaderCellDef>Wyróżnik</th>
         <td mat-cell *matCellDef="let element">{{element.discriminant}}</td>

@@ -16,5 +16,6 @@ public class OperatingControlPointRowDto {
     private Integer numberOfPlatforms;
     private String discriminant;
     private String railwayDepartment;
+    private Integer numberOfLines;
 
 }

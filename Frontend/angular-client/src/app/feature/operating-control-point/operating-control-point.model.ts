@@ -4,6 +4,8 @@ export class OperatingControlPointRowDto {
   loadingPoint: boolean;
   otherManager: boolean;
   numberOfPlatforms: number;
+
+  numberOfLines: number;
   discriminant: string;
   railwayDepartment: string;
 }

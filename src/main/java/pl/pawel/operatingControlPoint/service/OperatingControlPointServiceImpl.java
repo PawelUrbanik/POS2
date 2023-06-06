@@ -19,6 +19,10 @@ public class OperatingControlPointServiceImpl implements OperatingControlPointSe
     @Override
     public Page<OperatingControlPointRowDto> getPage(Pageable pageable) {
         final Page<OperatingControlPoint> page = repository.findAll(pageable);
-        return page.map(operatingControlPoint -> mapper.entityToRowDto(operatingControlPoint, operatingControlPoint.getPlatforms().size()));
+        return page.map(operatingControlPoint ->
+                mapper.entityToRowDto(
+                        operatingControlPoint,
+                        operatingControlPoint.getPlatforms().size(),
+                        operatingControlPoint.getLines().size()));
     }
 }

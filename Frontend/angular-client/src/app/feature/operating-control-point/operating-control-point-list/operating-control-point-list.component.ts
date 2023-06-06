@@ -32,6 +32,7 @@ export class OperatingControlPointListComponent implements OnInit, AfterViewInit
     'loadingPoint',
     'otherManager',
     'numberOfPlatforms',
+    'numberOfLines',
     'discriminant',
     'railwayDepartment'
   ]
