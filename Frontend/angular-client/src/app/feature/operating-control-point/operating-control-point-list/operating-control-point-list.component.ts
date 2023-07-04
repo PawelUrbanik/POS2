@@ -62,7 +62,7 @@ export class OperatingControlPointListComponent implements OnInit, AfterViewInit
     const formDialog = this.dialog.open(OperatingControlPointFormComponent,
       {
         data: {
-          model: row
+          id: row.id
         }
       })
 

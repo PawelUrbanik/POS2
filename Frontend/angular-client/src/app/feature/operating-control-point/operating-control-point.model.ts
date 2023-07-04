@@ -14,3 +14,29 @@ export interface OperatingControlPointResponse {
   content: OperatingControlPointRowDto[];
   totalElements: number;
 }
+
+export class OperatingControlPointFormDto {
+  id: number;
+  pointName: string;
+  loadingPoint: boolean;
+  otherManager: boolean;
+  platforms: PlatformOptionDto[];
+
+  numberOfLines: number;
+  discriminant: DiscriminantOptionDto;
+  railwayDepartment: RailwayDepartmentOptionDto;
+}
+
+export class PlatformOptionDto {
+ id: number;
+ value: string;
+}
+
+export class RailwayDepartmentOptionDto {
+  id: number;
+  value: string;
+}
+export class DiscriminantOptionDto {
+  id: number;
+  value: string;
+}

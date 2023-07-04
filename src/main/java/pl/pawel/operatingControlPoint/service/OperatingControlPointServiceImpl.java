@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.pawel.operatingControlPoint.mapper.OperatingControlPointMapper;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
+import pl.pawel.operatingControlPoint.model.OperatingControlPointFormDto;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointRowDto;
 import pl.pawel.operatingControlPoint.repository.OperatingControlPointRepository;
 
@@ -24,5 +25,10 @@ public class OperatingControlPointServiceImpl implements OperatingControlPointSe
                         operatingControlPoint,
                         operatingControlPoint.getPlatforms().size(),
                         operatingControlPoint.getLines().size()));
+    }
+
+    public OperatingControlPointFormDto getOne(Long id) {
+        final OperatingControlPoint found = repository.getById(id);
+        return mapper.entityToFormDto(found);
     }
 }

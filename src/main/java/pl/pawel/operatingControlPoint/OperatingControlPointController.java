@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import pl.pawel.operatingControlPoint.model.OperatingControlPointFormDto;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointRowDto;
 import pl.pawel.operatingControlPoint.service.OperatingControlPointService;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,5 +28,16 @@ public class OperatingControlPointController {
         log.debug("operating control point finished.");
         return page;
     }
+
+    @GetMapping("/{id}")
+    public OperatingControlPointFormDto getOne(@PathVariable("id") Long id) {
+        log.debug("opertaing control point get one started");
+        final OperatingControlPointFormDto found = service.getOne(id);
+        log.debug("operating control point get one finished.");
+        return found;
+    }
+
+//    @PostMapping
+//    public ResponseEntity<?> createOperatingContolPoint(@RequestBody @Valid )
 
 }

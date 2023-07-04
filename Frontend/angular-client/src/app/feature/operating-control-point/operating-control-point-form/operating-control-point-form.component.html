@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Operating control point: {{model.pointName}}</h2>
+<h2 mat-dialog-title><div *ngIf="model">Operating control point: {{model.pointName}}</div></h2>
 <mat-dialog-content>
   <form [formGroup]="form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>

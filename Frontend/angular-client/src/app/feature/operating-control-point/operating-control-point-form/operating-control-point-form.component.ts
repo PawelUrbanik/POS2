@@ -1,28 +1,32 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {OperatingControlPointService} from "../operating-control-point.service";
-import {OperatingControlPointRowDto} from "../operating-control-point.model";
+import {OperatingControlPointFormDto, OperatingControlPointRowDto} from "../operating-control-point.model";
+import {Discriminant} from "../../discriminant/discriminant";
+import {DiscriminantService} from "../../discriminant/discriminant.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-operating-control-point-form',
   templateUrl: './operating-control-point-form.component.html',
   styleUrls: ['./operating-control-point-form.component.css']
 })
-export class OperatingControlPointFormComponent {
+export class OperatingControlPointFormComponent implements OnInit{
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public inputData: any,
+    @Inject(MAT_DIALOG_DATA) public inputData: OperatingControlPointRowDto,
     private dialogRef: MatDialogRef<OperatingControlPointFormComponent>,
-    private operatingControlPointService: OperatingControlPointService
-  ) {
-    if (this.inputData)this.model = structuredClone(inputData.model);
-  }
+    private operatingControlPointService: OperatingControlPointService,
+    private discriminantService: DiscriminantService
+  ) {}
 
   form = new FormGroup({});
 
-  model!: OperatingControlPointRowDto;
+  model!: OperatingControlPointFormDto;
+
+  discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant();
   fields: FormlyFieldConfig[] = [
     {
       type: 'tabs',
@@ -51,16 +55,17 @@ export class OperatingControlPointFormComponent {
               }
             },
             {
-              // TODO request to download list of discriminants
-              key: 'discriminant',
-              type: 'input',
+              key: 'discriminant.id',
+              type: 'select',
               props: {
                 label: 'discriminant',
+                options: this.discriminants,
+                valueProp: 'id',
+                labelProp: 'shortcut'
               }
             },
             {
-              // TODO request to download list of railwayDepartments
-              key: 'railwayDepartment',
+              key: 'railwayDepartment.name',
               type: 'input',
               props: {
                 label: 'railwayDepartment',
@@ -93,6 +98,19 @@ export class OperatingControlPointFormComponent {
     },
   ];
 
+  ngOnInit(): void {
+    if (this.inputData.id !== undefined){
+      this.operatingControlPointService.getOne(this.inputData.id).subscribe({
+        next: value => {
+          this.model = value;
+        }
+      })
+    } else {
+      this.model = new OperatingControlPointFormDto();
+      this.model.pointName = '';
+    }
+
+  }
   onSubmit() {
     if (this.form.valid) {
       this.dialogRef.close(this.model);
@@ -106,7 +124,7 @@ export class OperatingControlPointFormComponent {
   }
 
   canDelete(): boolean {
-    return typeof(this.model.id) !== 'undefined';
+    return typeof(this.inputData.id) !== 'undefined';
   }
 
   delete(): void {

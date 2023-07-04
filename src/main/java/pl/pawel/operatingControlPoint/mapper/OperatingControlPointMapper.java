@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointDto;
+import pl.pawel.operatingControlPoint.model.OperatingControlPointFormDto;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointRowDto;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -19,4 +20,7 @@ public interface OperatingControlPointMapper {
     @Mapping(target = "numberOfPlatforms", source = "numberOfPlatforms")
     @Mapping(target = "numberOfLines", source = "numberOfLines")
     OperatingControlPointRowDto entityToRowDto(OperatingControlPoint entity, Integer numberOfPlatforms, Integer numberOfLines);
+
+    OperatingControlPointFormDto entityToFormDto(OperatingControlPoint entity);
+
 }
