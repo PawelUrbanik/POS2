@@ -11,6 +11,7 @@ import pl.pawel.operatingControlPoint.model.OperatingControlPointRowDto;
 import pl.pawel.operatingControlPoint.service.OperatingControlPointService;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -37,7 +38,34 @@ public class OperatingControlPointController {
         return found;
     }
 
-//    @PostMapping
-//    public ResponseEntity<?> createOperatingContolPoint(@RequestBody @Valid )
+    @PostMapping
+    public ResponseEntity<?> createOperatingContolPoint(@RequestBody @Valid OperatingControlPointFormDto dto) {
+        try {
+            final OperatingControlPointFormDto saved = service.createNewOperatingControlPoint(dto);
+            return ResponseEntity.created(URI.create("/points/"+saved.getId())).build();
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteOperatingControlPoint(@PathVariable Long id) {
+        try {
+            service.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateOpertaingControlPoint(@PathVariable Long id, @RequestBody @Valid OperatingControlPointFormDto dto) {
+        try {
+            final OperatingControlPointFormDto updated = service.updateOperatingControlPoint(dto);
+            return ResponseEntity.ok(updated);
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class OperatingControlPoint {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String pointName;
     private Boolean loadingPoint;
@@ -27,7 +27,7 @@ public class OperatingControlPoint {
     @OneToOne
     private Discriminant discriminant;
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.MERGE
     )
     private RailwayDepartment railwayDepartment;
     @OneToMany(

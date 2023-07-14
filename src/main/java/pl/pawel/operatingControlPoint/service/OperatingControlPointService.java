@@ -9,5 +9,7 @@ public interface OperatingControlPointService {
 
     Page<OperatingControlPointRowDto> getPage(Pageable pageable);
     OperatingControlPointFormDto getOne(Long id);
-
+    OperatingControlPointFormDto createNewOperatingControlPoint(OperatingControlPointFormDto dto);
+    void deleteById(Long id);
+    OperatingControlPointFormDto updateOperatingControlPoint(OperatingControlPointFormDto dto);
 }

@@ -3,10 +3,15 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {OperatingControlPointService} from "../operating-control-point.service";
-import {OperatingControlPointFormDto, OperatingControlPointRowDto} from "../operating-control-point.model";
+import {
+  OperatingControlPointFormDto,
+  OperatingControlPointRowDto
+} from "../operating-control-point.model";
 import {Discriminant} from "../../discriminant/discriminant";
 import {DiscriminantService} from "../../discriminant/discriminant.service";
 import {Observable} from "rxjs";
+import {DepartmentService} from "../../department/department.service";
+import {DepartmentRowDto} from "../../department/department.model";
 
 @Component({
   selector: 'app-operating-control-point-form',
@@ -19,7 +24,8 @@ export class OperatingControlPointFormComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public inputData: OperatingControlPointRowDto,
     private dialogRef: MatDialogRef<OperatingControlPointFormComponent>,
     private operatingControlPointService: OperatingControlPointService,
-    private discriminantService: DiscriminantService
+    private discriminantService: DiscriminantService,
+    private railwayDepartmentService: DepartmentService
   ) {}
 
   form = new FormGroup({});
@@ -27,6 +33,7 @@ export class OperatingControlPointFormComponent implements OnInit{
   model!: OperatingControlPointFormDto;
 
   discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant();
+  railwayDepartents: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments();
   fields: FormlyFieldConfig[] = [
     {
       type: 'tabs',
@@ -41,7 +48,10 @@ export class OperatingControlPointFormComponent implements OnInit{
                 label: 'ID',
                 placeholder: 'Id',
                 readonly: true
-              }
+              },
+              expressions: {
+                hide: '!model.id',
+              },
             },
             {
               key: 'pointName',
@@ -58,24 +68,30 @@ export class OperatingControlPointFormComponent implements OnInit{
               key: 'discriminant.id',
               type: 'select',
               props: {
-                label: 'discriminant',
+                label: 'Discriminant',
                 options: this.discriminants,
                 valueProp: 'id',
-                labelProp: 'shortcut'
+                labelProp: 'shortcut',
+                required: true
               }
             },
             {
-              key: 'railwayDepartment.name',
-              type: 'input',
+              key: 'railwayDepartment.id',
+              type: 'select',
               props: {
-                label: 'railwayDepartment',
+                label: 'Railway Department',
+                options: this.railwayDepartents,
+                valueProp: 'id',
+                labelProp: 'name',
+                required: true
               }
             },
             {
-              key: 'loadingPoint',
+              key: 'Loading Point',
               type: 'checkbox',
               props: {
                 label: 'loadingPoint',
+                indeterminate: false
               }
             },
           ],

@@ -22,5 +22,6 @@ public interface OperatingControlPointMapper {
     OperatingControlPointRowDto entityToRowDto(OperatingControlPoint entity, Integer numberOfPlatforms, Integer numberOfLines);
 
     OperatingControlPointFormDto entityToFormDto(OperatingControlPoint entity);
+    OperatingControlPoint formDtoToEntity(OperatingControlPointFormDto dto);
 
 }

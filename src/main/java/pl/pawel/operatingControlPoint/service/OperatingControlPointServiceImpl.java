@@ -31,4 +31,21 @@ public class OperatingControlPointServiceImpl implements OperatingControlPointSe
         final OperatingControlPoint found = repository.getById(id);
         return mapper.entityToFormDto(found);
     }
+
+    @Override
+    public OperatingControlPointFormDto createNewOperatingControlPoint(OperatingControlPointFormDto dto) {
+        final OperatingControlPoint entity = mapper.formDtoToEntity(dto);
+        final OperatingControlPoint saved = repository.save(entity);
+        return mapper.entityToFormDto(saved);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
+    @Override
+    public OperatingControlPointFormDto updateOperatingControlPoint(OperatingControlPointFormDto dto) {
+        return null;
+    }
 }
