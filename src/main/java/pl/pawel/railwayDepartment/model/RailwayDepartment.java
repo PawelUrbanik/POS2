@@ -20,7 +20,7 @@ public class RailwayDepartment {
     private String name;
     @OneToMany(
             mappedBy = "railwayDepartment",
-            orphanRemoval = true,
+            orphanRemoval = false,
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     @ToString.Exclude

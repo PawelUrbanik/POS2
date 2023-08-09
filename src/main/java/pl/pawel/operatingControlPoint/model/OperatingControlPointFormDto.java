@@ -12,7 +12,7 @@ public class OperatingControlPointFormDto {
     private String pointName;
     private Boolean loadingPoint;
     private Boolean otherManager;
-    private List<PlatformSelectOptionDto> platforms;
+//    private List<PlatformSelectOptionDto> platforms;
     private DiscirminantDto discriminant;
     private RailwayDepartmentDto railwayDepartment;
 //    private List<LinesAxisKm> lines;

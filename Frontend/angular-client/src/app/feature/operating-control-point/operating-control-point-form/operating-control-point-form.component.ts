@@ -87,10 +87,10 @@ export class OperatingControlPointFormComponent implements OnInit{
               }
             },
             {
-              key: 'Loading Point',
+              key: 'loadingPoint',
               type: 'checkbox',
               props: {
-                label: 'loadingPoint',
+                label: 'Loading Point',
                 indeterminate: false
               }
             },

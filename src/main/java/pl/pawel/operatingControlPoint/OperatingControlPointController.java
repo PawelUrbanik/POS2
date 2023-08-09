@@ -39,7 +39,7 @@ public class OperatingControlPointController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createOperatingContolPoint(@RequestBody @Valid OperatingControlPointFormDto dto) {
+    public ResponseEntity<?> createOperatingControlPoint(@RequestBody @Valid OperatingControlPointFormDto dto) {
         try {
             final OperatingControlPointFormDto saved = service.createNewOperatingControlPoint(dto);
             return ResponseEntity.created(URI.create("/points/"+saved.getId())).build();

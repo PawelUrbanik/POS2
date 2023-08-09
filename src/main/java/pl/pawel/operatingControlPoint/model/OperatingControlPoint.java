@@ -27,7 +27,7 @@ public class OperatingControlPoint {
     @OneToOne
     private Discriminant discriminant;
     @ManyToOne(
-            cascade = CascadeType.MERGE
+            cascade = CascadeType.ALL
     )
     private RailwayDepartment railwayDepartment;
     @OneToMany(
