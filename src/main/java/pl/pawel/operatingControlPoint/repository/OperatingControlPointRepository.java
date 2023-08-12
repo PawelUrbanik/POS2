@@ -10,4 +10,5 @@ public interface OperatingControlPointRepository {
     Page<OperatingControlPoint> findAll(Pageable pageable);
     OperatingControlPoint getById(Long id);
     OperatingControlPoint save(OperatingControlPoint entity);
+    void deleteById(Long id);
 }

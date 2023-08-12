@@ -27,7 +27,7 @@ public class OperatingControlPoint {
     @OneToOne
     private Discriminant discriminant;
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.REFRESH
     )
     private RailwayDepartment railwayDepartment;
     @OneToMany(

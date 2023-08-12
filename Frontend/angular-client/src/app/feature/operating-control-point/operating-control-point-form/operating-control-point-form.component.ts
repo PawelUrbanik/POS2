@@ -94,6 +94,14 @@ export class OperatingControlPointFormComponent implements OnInit{
                 indeterminate: false
               }
             },
+            {
+              key: 'otherManager',
+              type: 'checkbox',
+              props: {
+                label: 'Other Manager',
+                indeterminate: false
+              }
+            },
           ],
         },
         {
@@ -129,14 +137,15 @@ export class OperatingControlPointFormComponent implements OnInit{
   }
   onSubmit() {
     if (this.form.valid) {
-      this.dialogRef.close(this.model);
       if (typeof (this.model.id) !== 'undefined') {
         this.operatingControlPointService.update(this.model);
       } else {
         this.operatingControlPointService.create(this.model);
       }
     }
-    this.dialogRef.close(this.model);
+    setTimeout(()=> {
+      this.dialogRef.close(this.model);
+    }, 500)
   }
 
   canDelete(): boolean {
@@ -145,7 +154,9 @@ export class OperatingControlPointFormComponent implements OnInit{
 
   delete(): void {
     this.operatingControlPointService.delete(this.model.id);
-    this.dialogRef.close(this.model);
+    setTimeout(()=> {
+      this.dialogRef.close(this.model);
+    }, 500)
   }
 
 }

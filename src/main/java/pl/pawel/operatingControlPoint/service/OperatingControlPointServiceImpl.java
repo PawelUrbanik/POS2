@@ -51,7 +51,7 @@ public class OperatingControlPointServiceImpl implements OperatingControlPointSe
 
     @Override
     public void deleteById(Long id) {
-
+        repository.deleteById(id);
     }
 
     @Override
