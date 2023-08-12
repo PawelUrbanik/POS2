@@ -59,6 +59,7 @@ public class OperatingControlPointServiceImpl implements OperatingControlPointSe
         OperatingControlPoint entity = repository.getById(dto.getId());
         entity.setPointName(dto.getPointName());
         entity.setLoadingPoint(dto.getLoadingPoint());
+        entity.setOtherManager(dto.getOtherManager());
         entity.setDiscriminant(discriminantMapper.discriminantDtoToDiscriminant(dto.getDiscriminant()));
         Optional<RailwayDepartment> department = railwayDepartmentRepository.findById(dto.getRailwayDepartment().id());
         if (department.isPresent()) entity.setRailwayDepartment(department.get());
