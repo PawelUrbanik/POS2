@@ -1,5 +1,6 @@
 package pl.pawel.line.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class Line {
     private String lineName;
     private Double startKm;
     private Double endKm;
-    @JsonIgnore
+    @JsonManagedReference(value = "lineLineAxisKmRef")
     @OneToMany(
             mappedBy = "line",
             orphanRemoval = true,

@@ -1,5 +1,7 @@
 package pl.pawel.operatingControlPoint.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,10 +28,13 @@ public class OperatingControlPoint {
     private Set<Platform> platforms;
     @OneToOne
     private Discriminant discriminant;
+
+    @JsonBackReference(value = "pointDepartmentRef")
     @ManyToOne(
             cascade = CascadeType.REFRESH
     )
     private RailwayDepartment railwayDepartment;
+    @JsonManagedReference(value = "pointLinesAxisRef")
     @OneToMany(
             mappedBy = "operatingControlPoint",
             orphanRemoval = true,

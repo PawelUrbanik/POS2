@@ -1,6 +1,7 @@
 package pl.pawel.operatingControlPoint.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class LinesAxisKm implements Serializable {
 
+    @JsonBackReference(value = "lineLineAxisKmRef")
     @Id
     @ManyToOne
     @JoinColumn(
@@ -28,7 +30,7 @@ public class LinesAxisKm implements Serializable {
     private Double axisKm;
 
     @Id
-    @JsonIgnore
+    @JsonBackReference(value = "pointLinesAxisRef")
     @ManyToOne
     @JoinColumn(
             name = "operating_control_point_id",

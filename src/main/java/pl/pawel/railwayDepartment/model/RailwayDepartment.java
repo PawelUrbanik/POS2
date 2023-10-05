@@ -1,5 +1,6 @@
 package pl.pawel.railwayDepartment.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import pl.pawel.line.model.Line;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
@@ -24,6 +25,7 @@ public class RailwayDepartment {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     @ToString.Exclude
+    @JsonManagedReference(value = "pointDepartmentRef")
     private Set<OperatingControlPoint> operatingControlPoints;
 
     @ManyToMany(
