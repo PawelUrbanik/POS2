@@ -4,6 +4,7 @@ package pl.pawel.operatingControlPoint.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 import pl.pawel.line.model.Line;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class LinesAxisKm implements Serializable {
     private Double axisKm;
 
     @Id
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(
             name = "operating_control_point_id",

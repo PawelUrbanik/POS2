@@ -3,6 +3,7 @@ package pl.pawel.line.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 import pl.pawel.operatingControlPoint.model.LinesAxisKm;
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
@@ -22,6 +23,7 @@ public class Line {
     private String lineName;
     private Double startKm;
     private Double endKm;
+    @JsonIgnore
     @OneToMany(
             mappedBy = "line",
             orphanRemoval = true,
@@ -30,6 +32,7 @@ public class Line {
     )
     private Set<LinesAxisKm> controlPointsAxisKm;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "lines")
     private Set<RailwayDepartment> departments;
 }

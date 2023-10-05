@@ -15,5 +15,5 @@ public class OperatingControlPointFormDto {
 //    private List<PlatformSelectOptionDto> platforms;
     private DiscirminantDto discriminant;
     private RailwayDepartmentDto railwayDepartment;
-//    private List<LinesAxisKm> lines;
+    private List<LinesAxisKm> lines;
 }
