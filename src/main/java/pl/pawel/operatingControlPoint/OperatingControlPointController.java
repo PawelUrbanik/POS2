@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointFormDto;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointRowDto;
+import pl.pawel.operatingControlPoint.model.OperatingControlPointSearchCriteria;
 import pl.pawel.operatingControlPoint.service.OperatingControlPointService;
 
 import javax.validation.Valid;
@@ -23,9 +24,9 @@ public class OperatingControlPointController {
 
     private final OperatingControlPointService service;
     @GetMapping()
-    public Page<OperatingControlPointRowDto> getPage(Pageable pageable) {
+    public Page<OperatingControlPointRowDto> getPageCriteria(Pageable pageable, OperatingControlPointSearchCriteria criteria) {
         log.debug("opertaing control point get page started");
-        final Page<OperatingControlPointRowDto> page = service.getPage(pageable);
+        final Page<OperatingControlPointRowDto> page = service.getPage(pageable, criteria);
         log.debug("operating control point finished.");
         return page;
     }

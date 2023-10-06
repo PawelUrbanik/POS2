@@ -3,16 +3,21 @@ package pl.pawel.operatingControlPoint.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import pl.pawel.discriminant.mapper.DiscriminantMapper;
 import pl.pawel.operatingControlPoint.mapper.OperatingControlPointMapper;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointFormDto;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointRowDto;
+import pl.pawel.operatingControlPoint.model.OperatingControlPointSearchCriteria;
 import pl.pawel.operatingControlPoint.repository.OperatingControlPointRepository;
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 import pl.pawel.railwayDepartment.repository.RailwayDepartmentRepository;
 
+import javax.persistence.criteria.Predicate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -26,13 +31,42 @@ public class OperatingControlPointServiceImpl implements OperatingControlPointSe
     private final RailwayDepartmentRepository railwayDepartmentRepository;
 
     @Override
-    public Page<OperatingControlPointRowDto> getPage(Pageable pageable) {
-        final Page<OperatingControlPoint> page = repository.findAll(pageable);
+    public Page<OperatingControlPointRowDto> getPage(Pageable pageable, OperatingControlPointSearchCriteria criteria) {
+        final Page<OperatingControlPoint> page;
+
+        if (criteria == null) {
+            page = repository.findAll(pageable);
+        } else {
+            Specification spec = createSpecification(criteria);
+            page = repository.findAll(spec, pageable);
+        }
+
         return page.map(operatingControlPoint ->
                 mapper.entityToRowDto(
                         operatingControlPoint,
                         operatingControlPoint.getPlatforms().size(),
                         operatingControlPoint.getLines().size()));
+    }
+
+    private Specification<OperatingControlPoint> createSpecification(OperatingControlPointSearchCriteria criteria) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (criteria.name() != null && !criteria.name().isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("pointName"), criteria.name()));
+            }
+
+            if (criteria.discriminantId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("discriminant").get("id"), criteria.discriminantId()));
+            }
+
+            if (criteria.departmentId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("railwayDepartment").get("id"), criteria.departmentId()));
+            }
+
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+
     }
 
     public OperatingControlPointFormDto getOne(Long id) {
