@@ -16,6 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { OperatingControlPointFormComponent } from './operating-control-point-form/operating-control-point-form.component';
+import { OperatingControlPointSearchComponent } from './operating-control-point-search/operating-control-point-search.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { OperatingControlPointFormComponent } from './operating-control-point-fo
     OperatingControlPointListComponent,
     OperatingControlPointComponent,
     OperatingControlPointFormComponent,
+    OperatingControlPointSearchComponent,
   ],
   imports: [
     CommonModule,
