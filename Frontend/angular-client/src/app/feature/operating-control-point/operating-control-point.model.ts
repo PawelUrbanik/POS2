@@ -40,3 +40,8 @@ export class DiscriminantOptionDto {
   id: number;
   value: string;
 }
+export class OperatingControlPointSearchCriteria {
+  pointName: string;
+  discriminantId: number | null;
+  departmentId: number | null;
+}

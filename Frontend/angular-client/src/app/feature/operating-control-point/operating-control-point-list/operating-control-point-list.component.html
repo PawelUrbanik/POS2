@@ -57,8 +57,8 @@
       </tr>
     </table>
 
-    <mat-paginator [length]="dataSource.totalElements.getValue()" [pageSize]="10"
-                   [pageSizeOptions]="[5, 10, 20, 50, 100]">
+    <mat-paginator [length]="dataSource.totalElements.getValue()" [pageSize]="dataSource.pageSize.value"
+                   [pageSizeOptions]="[5, 10, 20, 50, 100]" [pageIndex]="dataSource.pageIndex.value">
     </mat-paginator>
   </div>
 </div>

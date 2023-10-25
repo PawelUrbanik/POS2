@@ -33,7 +33,7 @@ export class OperatingControlPointFormComponent implements OnInit{
   model!: OperatingControlPointFormDto;
 
   discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant();
-  railwayDepartents: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments();
+  railwayDepartments: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments();
   fields: FormlyFieldConfig[] = [
     {
       type: 'tabs',
@@ -80,7 +80,7 @@ export class OperatingControlPointFormComponent implements OnInit{
               type: 'select',
               props: {
                 label: 'Railway Department',
-                options: this.railwayDepartents,
+                options: this.railwayDepartments,
                 valueProp: 'id',
                 labelProp: 'name',
                 required: true
