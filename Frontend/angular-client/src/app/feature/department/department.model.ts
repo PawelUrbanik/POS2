@@ -1,4 +1,4 @@
 export interface DepartmentRowDto {
-  id: number;
+  id: number|undefined;
   name: string;
 }

@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 import {Discriminant} from "../../discriminant/discriminant";
 import {DepartmentRowDto} from "../../department/department.model";
 import {OperatingControlPointDatasource} from "../operating-control-point-list/operating-control-point-datasource";
-import {OperatingControlPointService} from "../operating-control-point.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'operating-control-point-search',
@@ -25,8 +25,29 @@ export class OperatingControlPointSearchComponent {
   ) {
   }
 
-  discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant();
-  railwayDepartments: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments();
+  discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant().pipe(
+    map(
+    discriminantArray => {
+      const emptyDiscriminant: Discriminant = {
+        id: undefined,
+        description: "",
+        shortcut: ""
+      }
+
+      return[emptyDiscriminant,...discriminantArray]
+    }
+    ));
+  railwayDepartments: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments().pipe(
+    map(
+      departmentsArray => {
+        const emptyDepartment: DepartmentRowDto = {
+          id: undefined,
+          name: ""
+        }
+        return [emptyDepartment, ...departmentsArray]
+      }
+    )
+  );
   form = new FormGroup({});
   model = {};
   options: FormlyFormOptions = {};
@@ -93,6 +114,14 @@ export class OperatingControlPointSearchComponent {
   }
 
   reset() {
-    this.model={};
+    this.model = {};
+    this.clearSearchCriteria();
+    this.dataSource.loadPoints();
+  }
+
+  clearSearchCriteria(): void {
+    this.dataSource.pointNameCriteria = "";
+    this.dataSource.departmentIdCriteria = null;
+    this.dataSource.discriminantIdCriteria = null;
   }
 }

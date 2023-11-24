@@ -53,7 +53,7 @@ public class OperatingControlPointServiceImpl implements OperatingControlPointSe
             List<Predicate> predicates = new ArrayList<>();
 
             if (criteria.name() != null && !criteria.name().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("pointName"), criteria.name()));
+                predicates.add(criteriaBuilder.like(root.get("pointName"), criteria.name()+"%"  ));
             }
 
             if (criteria.discriminantId() != null) {
