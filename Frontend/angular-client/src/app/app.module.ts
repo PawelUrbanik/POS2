@@ -17,6 +17,7 @@ import {FORM_CONFIG} from "./core/form-config";
 import {CoreModule} from "./core/core.module";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import {CoreModule} from "./core/core.module";
 
     FeatureModule,
     CoreModule
+
 
 
   ],

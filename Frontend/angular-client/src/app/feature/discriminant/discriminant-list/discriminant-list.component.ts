@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {DiscriminantFormComponent} from "../discriminant-form/discriminant-form.component";
 
 
+
 @Component({
   selector: 'app-discriminant-list',
   templateUrl: './discriminant-list.component.html',
@@ -18,6 +19,7 @@ export class DiscriminantListComponent implements OnInit {
               public dialog: MatDialog) {
   }
 
+
   dataSource = new MatTableDataSource<Discriminant>();
   displayedColumns: string[] = ['id', 'shortcut', 'description'];
 
@@ -26,6 +28,7 @@ export class DiscriminantListComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateTable();
+
   }
 
   applyFilter(event: Event) {

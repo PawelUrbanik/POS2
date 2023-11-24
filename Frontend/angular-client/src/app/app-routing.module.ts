@@ -29,6 +29,7 @@ const routes: Routes = [
     title: 'Departments'
   },
   {
+
     path: '',
     redirectTo: '/discriminants',
     pathMatch: 'full'
