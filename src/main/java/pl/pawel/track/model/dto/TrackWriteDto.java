@@ -1,13 +1,15 @@
 package pl.pawel.track.model.dto;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class TrackWriteDto {
 
-    private Integer trackNumber;
+    private String trackNumber;
     private Double axisKm;
     private Long EdgeId;
 }

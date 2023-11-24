@@ -1,0 +1,1 @@
+drop table if exists LOADING_POINT cascade;

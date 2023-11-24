@@ -4,3 +4,7 @@ table {
 .table-div{
       margin: 20px;
   }
+.discriminant-table tr:hover{
+    background: whitesmoke;
+    cursor: pointer;
+}

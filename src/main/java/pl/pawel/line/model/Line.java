@@ -1,14 +1,19 @@
 package pl.pawel.line.model;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
+import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
+import pl.pawel.operatingControlPoint.model.LinesAxisKm;
+import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Line {
 
@@ -19,6 +24,16 @@ public class Line {
     private String lineName;
     private Double startKm;
     private Double endKm;
-    @OneToMany(mappedBy = "line")
-    private Set<OperatingControlPoint> controlPoints;
+    @JsonManagedReference(value = "lineLineAxisKmRef")
+    @OneToMany(
+            mappedBy = "line",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private Set<LinesAxisKm> controlPointsAxisKm;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "lines")
+    private Set<RailwayDepartment> departments;
 }

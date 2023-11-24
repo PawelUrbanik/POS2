@@ -1,32 +1,69 @@
 package pl.pawel.operatingControlPoint.model;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.pawel.line.model.Line;
+import lombok.Setter;
 import pl.pawel.discriminant.model.Discriminant;
-import pl.pawel.loadingPoint.model.LoadingPoint;
 import pl.pawel.platform.model.Platform;
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class OperatingControlPoint {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String pointName;
-    @OneToMany(mappedBy = "operatingControlPoint")
+    private Boolean loadingPoint;
+    private Boolean otherManager;
+    @OneToMany(mappedBy = "operatingControlPoint", fetch = FetchType.LAZY)
     private Set<Platform> platforms;
     @OneToOne
     private Discriminant discriminant;
-    @OneToOne
-    private LoadingPoint loadingPoint;
-    @ManyToOne
+
+    @JsonBackReference(value = "pointDepartmentRef")
+    @ManyToOne(
+            cascade = CascadeType.REFRESH
+    )
     private RailwayDepartment railwayDepartment;
-    @ManyToOne
-    private Line line;
+    @JsonManagedReference(value = "pointLinesAxisRef")
+    @OneToMany(
+            mappedBy = "operatingControlPoint",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private Set<LinesAxisKm> lines;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OperatingControlPoint that = (OperatingControlPoint) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "OperatingControlPoint{" +
+                "id=" + id +
+                ", pointName='" + pointName + '\'' +
+                ", loadingPoint=" + loadingPoint +
+                ", otherManager=" + otherManager +
+                ", discriminant=" + discriminant +
+                '}';
+    }
 }

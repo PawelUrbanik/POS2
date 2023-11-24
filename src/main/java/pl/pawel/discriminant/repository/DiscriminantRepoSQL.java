@@ -5,5 +5,10 @@ import org.springframework.stereotype.Repository;
 import pl.pawel.discriminant.model.Discriminant;
 
 @Repository
-public interface DiscriminantRrepoSQL extends DisciminantRepository, JpaRepository<Discriminant, Long> {
+public interface DiscriminantRepoSQL extends DiscriminantRepository, JpaRepository<Discriminant, Long> {
+
+    boolean existsByShortcut(String shortcut);
+
+    boolean existsById(Long id);
+
 }

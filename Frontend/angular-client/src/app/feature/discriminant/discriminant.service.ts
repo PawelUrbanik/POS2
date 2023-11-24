@@ -15,4 +15,16 @@ export class DiscriminantService {
   getDiscriminant(): Observable<Discriminant[]> {
     return this.httpClient.get<Discriminant[]>(DISCRIMINANT_URL);
   }
+
+  updateDiscriminant(discriminant: Discriminant) {
+   this.httpClient.put(DISCRIMINANT_URL + '/' + discriminant.id, discriminant).subscribe();
+  }
+
+  createDiscriminant(discriminant: Discriminant) {
+    this.httpClient.post(DISCRIMINANT_URL , discriminant).subscribe();
+  }
+
+  deleteDiscriminant(id: number| undefined) {
+    this.httpClient.delete(DISCRIMINANT_URL+'/'+id , {}).subscribe();
+  }
 }
