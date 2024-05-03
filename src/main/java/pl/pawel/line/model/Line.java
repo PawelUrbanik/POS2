@@ -1,14 +1,14 @@
 package pl.pawel.line.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
 import pl.pawel.operatingControlPoint.model.LinesAxisKm;
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity

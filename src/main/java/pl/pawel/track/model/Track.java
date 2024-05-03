@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 import pl.pawel.edge.model.Edge;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Getter

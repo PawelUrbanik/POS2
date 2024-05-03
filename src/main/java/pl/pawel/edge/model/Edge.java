@@ -6,7 +6,7 @@ import lombok.Setter;
 import pl.pawel.platform.model.Platform;
 import pl.pawel.track.model.Track;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 

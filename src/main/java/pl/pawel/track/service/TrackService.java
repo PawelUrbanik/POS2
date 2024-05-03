@@ -8,7 +8,7 @@ import pl.pawel.track.model.Track;
 import pl.pawel.track.model.dto.TrackWriteDto;
 import pl.pawel.track.repository.TrackRepository;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 @Service
 public class TrackService {

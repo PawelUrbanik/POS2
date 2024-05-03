@@ -6,7 +6,7 @@ import lombok.Setter;
 import pl.pawel.edge.model.Edge;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity

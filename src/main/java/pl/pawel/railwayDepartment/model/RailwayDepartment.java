@@ -5,7 +5,7 @@ import lombok.*;
 import pl.pawel.line.model.Line;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 

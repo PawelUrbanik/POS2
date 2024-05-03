@@ -5,7 +5,7 @@ import {FormlyFieldConfig} from "@ngx-formly/core";
 import {OperatingControlPointService} from "../operating-control-point.service";
 import {
   OperatingControlPointFormDto,
-  OperatingControlPointRowDto
+  OperatingControlPointRowDto, PlatformOptionDto
 } from "../operating-control-point.model";
 import {Discriminant} from "../../discriminant/discriminant";
 import {DiscriminantService} from "../../discriminant/discriminant.service";
@@ -18,7 +18,7 @@ import {DepartmentRowDto} from "../../department/department.model";
   templateUrl: './operating-control-point-form.component.html',
   styleUrls: ['./operating-control-point-form.component.css']
 })
-export class OperatingControlPointFormComponent implements OnInit{
+export class OperatingControlPointFormComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public inputData: OperatingControlPointRowDto,
@@ -26,7 +26,8 @@ export class OperatingControlPointFormComponent implements OnInit{
     private operatingControlPointService: OperatingControlPointService,
     private discriminantService: DiscriminantService,
     private railwayDepartmentService: DepartmentService
-  ) {}
+  ) {
+  }
 
   form = new FormGroup({});
 
@@ -34,12 +35,13 @@ export class OperatingControlPointFormComponent implements OnInit{
 
   discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant();
   railwayDepartments: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments();
+  platforms: Observable<PlatformOptionDto[]> = new Observable<PlatformOptionDto[]>();
   fields: FormlyFieldConfig[] = [
     {
       type: 'tabs',
       fieldGroup: [
         {
-          props: { label: 'General' },
+          props: {label: 'General'},
           fieldGroup: [
             {
               key: 'id',
@@ -105,36 +107,45 @@ export class OperatingControlPointFormComponent implements OnInit{
           ],
         },
         {
-          //TODO Po dodaniu encji z peronami wyświetlać listę peronów z możliwością edycji każdego rekordu, dodania, usunięcia
-          props: { label: 'Platforms' },
+          props: {label: 'Platforms'},
           fieldGroup: [
             {
-              key: 'platform',
-              type: 'input',
+              key: 'platformData',
+              type: 'platformsListForm',
               props: {
-                label: 'Platform',
-                required: false,
+                dataSource: this.platforms
               },
             },
           ],
         },
+
       ],
     },
   ];
 
   ngOnInit(): void {
-    if (this.inputData.id !== undefined){
+    if (this.inputData.id !== undefined) {
       this.operatingControlPointService.getOne(this.inputData.id).subscribe({
         next: value => {
           this.model = value;
         }
-      })
+      });
+      // this.operatingControlPointService.getPlatformsList(this.inputData.id)
+      //   .subscribe(
+      //     data => {
+      //       this.platforms = data;
+      //       this.initializeFormWithTable();
+      //     }
+      //   );
+      // this.platforms = this.operatingControlPointService.getPlatformsList(this.inputData.id);
+      // this.platforms.subscribe();
     } else {
       this.model = new OperatingControlPointFormDto();
       this.model.pointName = '';
     }
 
   }
+
   onSubmit() {
     if (this.form.valid) {
       if (typeof (this.model.id) !== 'undefined') {
@@ -143,20 +154,37 @@ export class OperatingControlPointFormComponent implements OnInit{
         this.operatingControlPointService.create(this.model);
       }
     }
-    setTimeout(()=> {
+    setTimeout(() => {
       this.dialogRef.close(this.model);
     }, 500)
   }
 
   canDelete(): boolean {
-    return typeof(this.inputData.id) !== 'undefined';
+    return typeof (this.inputData.id) !== 'undefined';
   }
 
   delete(): void {
     this.operatingControlPointService.delete(this.model.id);
-    setTimeout(()=> {
+    setTimeout(() => {
       this.dialogRef.close(this.model);
     }, 500)
   }
 
+  initializeFormWithTable() {
+    this.fields = [
+      ...this.fields,
+      {
+        props: {label: 'Platforms'},
+        fieldGroup: [
+          {
+            key: 'platformData',
+            type: 'platformsListForm',
+            props: {
+              dataSource: this.platforms
+            },
+          },
+        ],
+      },
+    ]
+  }
 }

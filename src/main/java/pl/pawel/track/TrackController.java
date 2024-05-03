@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.pawel.track.model.dto.TrackWriteDto;
 import pl.pawel.track.service.TrackService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RestController(value = "/tracks")
 public class TrackController {

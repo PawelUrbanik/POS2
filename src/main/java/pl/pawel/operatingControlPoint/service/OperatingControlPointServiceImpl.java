@@ -15,7 +15,7 @@ import pl.pawel.operatingControlPoint.repository.OperatingControlPointRepository
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 import pl.pawel.railwayDepartment.repository.RailwayDepartmentRepository;
 
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
