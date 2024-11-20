@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/platforms")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin("http://localhost:4200/")
 public class PlatformController {
 
     private final PlatformService platformService;
@@ -26,6 +27,16 @@ public class PlatformController {
         final List<PlatformSelectOptionDto> platforms = platformService.getAllByOperatingControlPoint(pointId);
         log.debug("Found platforms: " + platforms.size());
         return ResponseEntity.ok(platforms);
+    }
+
+    @GetMapping("/getList/{pointId}")
+    public ResponseEntity<List<PlatformTabTableRowDto>> getTabRowDto(@PathVariable Long pointId) {
+        log.debug("Get Platforms for Platform tab by control point Id: " + pointId);
+
+        final List<PlatformTabTableRowDto> platforms = platformService.getAllTabRowDtosByPointId(pointId);
+        log.debug("Found platforms: " + platforms.size());
+        return ResponseEntity.ok(platforms);
+
     }
 
 }
