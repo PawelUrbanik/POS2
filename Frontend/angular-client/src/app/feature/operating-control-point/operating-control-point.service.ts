@@ -6,7 +6,7 @@ import {PLATFORMS_URL} from "../../core/constants";
 import {
   OperatingControlPointFormDto,
   OperatingControlPointResponse,
-  OperatingControlPointSearchCriteria, PlatformOptionDto
+  OperatingControlPointSearchCriteria, PlatformOptionDto, PlatformRowDto
 } from "./operating-control-point.model";
 
 @Injectable({
@@ -51,7 +51,7 @@ export class OperatingControlPointService {
     this.httpClient.delete(OPERATING_CONTROL_POINTS_URL +"/"+pointId, {}).subscribe();
   }
 
-  getPlatformsList(pointId: number): Observable<PlatformOptionDto[]> {
-    return this.httpClient.get<PlatformOptionDto[]>(PLATFORMS_URL + "/getList/"+ pointId, {});
+  getPlatformsList(pointId: number): Observable<PlatformRowDto[]> {
+    return this.httpClient.get<PlatformRowDto[]>(PLATFORMS_URL + "/getList/"+ pointId, {});
   }
 }

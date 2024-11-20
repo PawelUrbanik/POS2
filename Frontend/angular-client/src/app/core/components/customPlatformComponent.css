@@ -1,0 +1,7 @@
+.wide-table {
+  width: 100%;
+  max-width: none;
+}
+.column-number {
+  width: 150px; /* Ustaw szerokość odpowiednią dla tej kolumny */
+}

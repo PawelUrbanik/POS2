@@ -45,3 +45,12 @@ export class OperatingControlPointSearchCriteria {
   discriminantId: number | null;
   departmentId: number | null;
 }
+
+export class PlatformRowDto {
+  id: number;
+  platformNumber: string;
+  height: number;
+  length: number;
+  requestStop: boolean;
+  numberOfEdges: number;
+}

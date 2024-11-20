@@ -1,6 +1,7 @@
 import {ConfigOption, FormlyFieldConfig} from "@ngx-formly/core";
 import {AbstractControl, ValidationErrors} from "@angular/forms";
 import {FormlyFieldTabs} from "./components/FormlyFieldTabs.type";
+import {CustomPlatformTableComponent} from "./components/CustomPlatformTableComponent";
 
 export const FORM_CONFIG: ConfigOption = {
   validators: [{name: 'onlyLetters', validation: LetterValidator}],
@@ -8,7 +9,10 @@ export const FORM_CONFIG: ConfigOption = {
     {name: 'required', message: 'This field is required'},
     {name: 'onlyLetters', message: LetterValidatorMessage }
   ],
-  types: [{name: 'tabs', component: FormlyFieldTabs}]
+  types: [
+    {name: 'tabs', component: FormlyFieldTabs},
+    { name: 'platformsListForm', component: CustomPlatformTableComponent}
+  ]
 };
 
 export function LetterValidator(control: AbstractControl): ValidationErrors|null {
