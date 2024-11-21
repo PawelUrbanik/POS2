@@ -19,7 +19,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class OperatingControlPoint {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operating_control_point_sequence")
+    @SequenceGenerator(name = "operating_control_point_sequence", sequenceName = "operating_control_point_sequence", allocationSize = 1)
     private Long id;
     private String pointName;
     private Boolean loadingPoint;

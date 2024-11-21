@@ -145,9 +145,9 @@ export class OperatingControlPointFormComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       if (typeof this.model.id !== 'undefined') {
-        // this.operatingControlPointService.update(this.model).subscribe();
+        this.operatingControlPointService.update(this.model);
       } else {
-        // this.operatingControlPointService.create(this.model).subscribe();
+        this.operatingControlPointService.create(this.model);
       }
       this.dialogRef.close(this.model);
     }
@@ -155,9 +155,9 @@ export class OperatingControlPointFormComponent implements OnInit {
 
   delete(): void {
     if (this.inputData.id) {
-      // this.operatingControlPointService.delete(this.model.id).subscribe(() => {
-      //   this.dialogRef.close(this.model);
-      // });
+      this.operatingControlPointService.delete(this.model.id).subscribe(() => {
+        this.dialogRef.close(this.model);
+      });
     }
   }
   canDelete(): boolean {
