@@ -91,6 +91,7 @@ export class OperatingControlPointFormComponent implements OnInit {
             {
               key: 'loadingPoint',
               type: 'checkbox',
+              defaultValue: false,
               props: {
                 label: 'Loading Point',
               },
@@ -98,6 +99,7 @@ export class OperatingControlPointFormComponent implements OnInit {
             {
               key: 'otherManager',
               type: 'checkbox',
+              defaultValue: false,
               props: {
                 label: 'Other Manager',
               },

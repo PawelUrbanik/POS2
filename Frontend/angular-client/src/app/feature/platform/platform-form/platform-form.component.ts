@@ -64,6 +64,7 @@ export class PlatformFormComponent implements OnInit{
     {
       key: 'requestStop',
       type: 'checkbox',
+      defaultValue: false,
       props: {
         label: 'requestStop',
         placeholder: 'requestStop'
