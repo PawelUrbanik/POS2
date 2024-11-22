@@ -6,6 +6,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormlyModule} from "@ngx-formly/core";
 import {CustomPlatformTableComponent} from "./components/CustomPlatformTableComponent";
 import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {PlatformModule} from "../feature/platform/platform.module";
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import {MatTableModule} from "@angular/material/table";
     MatTabsModule,
     FormlyModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    PlatformModule
   ]
 })
 export class CoreModule { }

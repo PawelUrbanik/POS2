@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.pawel.platform.mapper.PlatformMapper;
 import pl.pawel.platform.model.Platform;
+import pl.pawel.platform.model.PlatformDto;
 import pl.pawel.platform.model.PlatformSelectOptionDto;
 import pl.pawel.platform.model.PlatformTabTableRowDto;
 import pl.pawel.platform.repository.PlatformRepository;
@@ -37,5 +38,12 @@ public class PlatformServiceImpl implements PlatformService{
                 .collect(Collectors.toList());
 
         return list;
+    }
+
+    @Override
+    public PlatformDto getPlatform(Long platformId) {
+        Platform entity = platformRepository.getById(platformId);
+        PlatformDto dto = platformMapper.entityToPlatformDto(entity);
+        return dto;
     }
 }

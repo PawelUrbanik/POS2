@@ -1,10 +1,10 @@
 package pl.pawel.platform;
 
-import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.pawel.platform.model.PlatformDto;
 import pl.pawel.platform.model.PlatformSelectOptionDto;
 import pl.pawel.platform.model.PlatformTabTableRowDto;
 import pl.pawel.platform.service.PlatformService;
@@ -36,7 +36,15 @@ public class PlatformController {
         final List<PlatformTabTableRowDto> platforms = platformService.getAllTabRowDtosByPointId(pointId);
         log.debug("Found platforms: " + platforms.size());
         return ResponseEntity.ok(platforms);
+    }
 
+    @GetMapping("/get/{platformId}")
+    public ResponseEntity<?> getPlatformById(@PathVariable Long platformId) {
+        log.debug("Get Platform by id: " + platformId);
+        final PlatformDto dto = platformService.getPlatform(platformId);
+        log.debug("Found platform: " + dto);
+
+        return ResponseEntity.ok(dto);
     }
 
 }

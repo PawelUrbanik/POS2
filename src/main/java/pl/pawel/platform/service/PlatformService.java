@@ -1,5 +1,6 @@
 package pl.pawel.platform.service;
 
+import pl.pawel.platform.model.PlatformDto;
 import pl.pawel.platform.model.PlatformSelectOptionDto;
 import pl.pawel.platform.model.PlatformTabTableRowDto;
 
@@ -10,4 +11,6 @@ public interface PlatformService {
     List<PlatformSelectOptionDto> getAllByOperatingControlPoint(Long pointId);
 
     List<PlatformTabTableRowDto> getAllTabRowDtosByPointId(Long pointId);
+
+    PlatformDto getPlatform(Long platformId);
 }

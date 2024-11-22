@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import pl.pawel.edge.model.Edge;
 import pl.pawel.platform.model.Platform;
+import pl.pawel.platform.model.PlatformDto;
 import pl.pawel.platform.model.PlatformSelectOptionDto;
 import pl.pawel.platform.model.PlatformTabTableRowDto;
 
@@ -14,6 +15,8 @@ import java.util.Set;
 public interface PlatformMapper {
 
     PlatformSelectOptionDto entityToDto(Platform platform);
+
+    PlatformDto entityToPlatformDto(Platform platform);
 
     @Mapping(target = "numberOfEdges", expression = "java(countEdges(platform.getEdges()))")
     PlatformTabTableRowDto entityToTableRowDto(Platform platform);

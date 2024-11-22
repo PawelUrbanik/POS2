@@ -6,6 +6,10 @@ import {
   OperatingControlPointFormComponent
 } from "../../feature/operating-control-point/operating-control-point-form/operating-control-point-form.component";
 import {PlatformRowDto} from "../../feature/operating-control-point/operating-control-point.model";
+import {PlatformService} from "../../feature/platform/platform.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DiscriminantFormComponent} from "../../feature/discriminant/discriminant-form/discriminant-form.component";
+import {PlatformFormComponent} from "../../feature/platform/platform-form/platform-form.component";
 @Component({
   selector: 'platforms-list-form',
   template: `
@@ -33,9 +37,26 @@ import {PlatformRowDto} from "../../feature/operating-control-point/operating-co
           <td mat-cell *matCellDef="let element" class="px-2"> {{ element.numberOfEdges }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="px-2"> Actions</th>
+          <td mat-cell *matCellDef="let element" class="px-2">
+            <button mat-icon-button (click)="editRow(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteRow(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+
+      <button mat-raised-button color="primary" (click)="addNewRow()" class="mt-4">
+        Add new platform
+      </button>
+
     </div>
   `,
   styleUrls: [
@@ -43,7 +64,10 @@ import {PlatformRowDto} from "../../feature/operating-control-point/operating-co
   ]
 })
 export class CustomPlatformTableComponent extends FieldType {
-  constructor(public viewContainerRef: ViewContainerRef) {
+  constructor(
+    public viewContainerRef: ViewContainerRef,
+    public dialog: MatDialog
+  ) {
     super();
     const parent = this.viewContainerRef.injector.get(OperatingControlPointFormComponent, null);
     parent?.platforms.subscribe({
@@ -60,8 +84,43 @@ export class CustomPlatformTableComponent extends FieldType {
     'length',
     'requestStop',
     'numberOfEdges',
+    'actions'
   ];
 
   dataSource = new MatTableDataSource<PlatformRowDto[]>();
+
+
+
+  editRow(element: PlatformRowDto) {
+    const formDialog = this.dialog.open(PlatformFormComponent,
+      {
+        data: {
+          id: element.id
+        }
+      })
+  }
+
+
+  deleteRow(element: PlatformRowDto) {
+    // const index = this.dataSource.data.indexOf(element);
+    // if (index > -1) {
+    //   this.dataSource.data.splice(index, 1);
+    //   this.dataSource._updateChangeSubscription();
+    // }
+  }
+
+  /**
+   * Adds a new row to the table
+   */
+  addNewRow() {
+    const newRow: Partial<PlatformRowDto> = {
+      platformNumber: '',
+      height: 0,
+      length: 0,
+      requestStop: false,
+    };
+    // this.dataSource.data.push(newRow);
+    this.dataSource._updateChangeSubscription();
+  }
 
 }
