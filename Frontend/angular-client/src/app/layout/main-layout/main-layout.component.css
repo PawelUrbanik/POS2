@@ -1,0 +1,6 @@
+mat-sidenav-container {
+  height: 100vh; /* Ustaw pełną wysokość ekranu */
+}
+mat-sidenav-content {
+  overflow: auto;
+}

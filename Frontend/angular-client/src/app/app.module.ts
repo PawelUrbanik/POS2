@@ -15,6 +15,8 @@ import {FormlyMaterialModule} from "@ngx-formly/material";
 import {MatIconModule} from "@angular/material/icon";
 import {FORM_CONFIG} from "./core/form-config";
 import {CoreModule} from "./core/core.module";
+import { HeaderComponent } from './layout/header/header.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -22,6 +24,7 @@ import {CoreModule} from "./core/core.module";
   declarations: [
     AppComponent,
     MainLayoutComponent,
+    HeaderComponent,
     ],
   imports: [
     BrowserModule,
@@ -34,8 +37,8 @@ import {CoreModule} from "./core/core.module";
     MatIconModule,
 
     FeatureModule,
-    CoreModule
-
+    CoreModule,
+    MatButtonModule
 
 
   ],
