@@ -13,4 +13,6 @@ public interface PlatformService {
     List<PlatformTabTableRowDto> getAllTabRowDtosByPointId(Long pointId);
 
     PlatformDto getPlatform(Long platformId);
+
+    PlatformDto updatePlatform(PlatformDto platformDto);
 }

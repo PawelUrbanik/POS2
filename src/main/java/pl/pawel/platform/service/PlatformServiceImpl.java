@@ -46,4 +46,18 @@ public class PlatformServiceImpl implements PlatformService{
         PlatformDto dto = platformMapper.entityToPlatformDto(entity);
         return dto;
     }
+
+    @Override
+    public PlatformDto updatePlatform(PlatformDto platformDto) {
+        Platform platformFromDB = platformRepository.getById(platformDto.getId());
+        platformFromDB.setPlatformNumber(platformDto.getPlatformNumber());
+        platformFromDB.setLength(platformDto.getLength());
+        platformFromDB.setHeight(platformDto.getHeight());
+        platformFromDB.setRequestStop(platformDto.isRequestStop());
+        platformFromDB.setEdges(platformDto.getEdges());
+        Platform saved = platformRepository.save(platformFromDB);
+        PlatformDto savedDto = platformMapper.entityToPlatformDto(saved);
+
+        return savedDto;
+    }
 }

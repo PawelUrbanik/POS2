@@ -1,7 +1,7 @@
 import {Edge} from "../edge/edge.model";
 
 export interface Platform {
-  id: number;
+  id?: number;
   platformNumber: string;
   height: number;
   length: number;

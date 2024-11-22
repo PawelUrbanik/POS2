@@ -75,7 +75,7 @@ export class PlatformFormComponent implements OnInit{
     if (this.form.valid) {
       this.dialogRef.close(this.model);
       if (typeof (this.model.id) !== 'undefined') {
-        this.platformService.updatePlatform(this.model);
+        this.platformService.updatePlatform(this.model).subscribe();
       } else {
         this.platformService.createPlatform(this.model);
       }
@@ -89,16 +89,29 @@ export class PlatformFormComponent implements OnInit{
   }
 
   deletePlatform(): void {
-    this.platformService.deletePlatform(this.model.id);
+    if (this.model.id !== undefined){
+      this.platformService.deletePlatform(this.model.id);
+    }
     this.dialogRef.close(this.model);
   }
 
   ngOnInit(): void {
-    this.platformService.getOne(this.id.id).subscribe(
-      {
-        next: platform => this.model = platform
+    if (this.id === undefined) {
+      this.model = {
+        edges: [],
+        height: 0,
+        length: 0,
+        requestStop: false,
+        platformNumber: ''
       }
-    )
+    } else {
+      this.platformService.getOne(this.id.id).subscribe(
+        {
+          next: platform => this.model = platform
+        }
+      )
+    }
+
   }
 
 }

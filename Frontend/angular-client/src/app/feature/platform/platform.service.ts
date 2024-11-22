@@ -19,8 +19,8 @@ export class PlatformService {
   }
 
 
-  updatePlatform(model: Platform) {
-
+  updatePlatform(platform: Platform) {
+    return this.httpClient.put<Platform>(PLATFORMS_URL, platform)
   }
 
   createPlatform(model: Platform) {

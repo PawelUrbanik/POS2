@@ -8,4 +8,5 @@ public interface PlatformRepository {
 
     List<Platform> getAllByOperatingControlPoint(Long id);
     Platform getById(Long id);
+    Platform save(Platform platform);
 }

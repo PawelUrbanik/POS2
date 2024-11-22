@@ -6,10 +6,9 @@ import {
   OperatingControlPointFormComponent
 } from "../../feature/operating-control-point/operating-control-point-form/operating-control-point-form.component";
 import {PlatformRowDto} from "../../feature/operating-control-point/operating-control-point.model";
-import {PlatformService} from "../../feature/platform/platform.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DiscriminantFormComponent} from "../../feature/discriminant/discriminant-form/discriminant-form.component";
 import {PlatformFormComponent} from "../../feature/platform/platform-form/platform-form.component";
+import {OperatingControlPointService} from "../../feature/operating-control-point/operating-control-point.service";
 @Component({
   selector: 'platforms-list-form',
   template: `
@@ -66,7 +65,8 @@ import {PlatformFormComponent} from "../../feature/platform/platform-form/platfo
 export class CustomPlatformTableComponent extends FieldType {
   constructor(
     public viewContainerRef: ViewContainerRef,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private operatingControlPointService: OperatingControlPointService
   ) {
     super();
     const parent = this.viewContainerRef.injector.get(OperatingControlPointFormComponent, null);
@@ -98,6 +98,12 @@ export class CustomPlatformTableComponent extends FieldType {
           id: element.id
         }
       })
+
+    formDialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.refreshDataSource();
+      }
+    })
   }
 
 
@@ -113,14 +119,11 @@ export class CustomPlatformTableComponent extends FieldType {
    * Adds a new row to the table
    */
   addNewRow() {
-    const newRow: Partial<PlatformRowDto> = {
-      platformNumber: '',
-      height: 0,
-      length: 0,
-      requestStop: false,
-    };
-    // this.dataSource.data.push(newRow);
-    this.dataSource._updateChangeSubscription();
+    const formDialog = this.dialog.open(PlatformFormComponent);
   }
 
+  private refreshDataSource() {
+    const parent = this.viewContainerRef.injector.get(OperatingControlPointFormComponent, null);
+    parent?.refreshPlatformData();
+  }
 }

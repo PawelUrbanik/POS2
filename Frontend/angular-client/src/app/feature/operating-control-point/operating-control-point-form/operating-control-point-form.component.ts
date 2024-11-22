@@ -10,10 +10,11 @@ import {
 } from '../operating-control-point.model';
 import { Discriminant } from '../../discriminant/discriminant';
 import { DiscriminantService } from '../../discriminant/discriminant.service';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { DepartmentService } from '../../department/department.service';
 import { DepartmentRowDto } from '../../department/department.model';
 import { MatTableDataSource } from '@angular/material/table';
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-operating-control-point-form',
@@ -32,6 +33,7 @@ export class OperatingControlPointFormComponent implements OnInit {
   form = new FormGroup({});
   model!: OperatingControlPointFormDto;
 
+  private refreshSubject = new BehaviorSubject<void>(undefined);
   discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant();
   railwayDepartments: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments();
   platforms: Observable<PlatformRowDto[]> = new Observable<PlatformRowDto[]>();
@@ -135,7 +137,10 @@ export class OperatingControlPointFormComponent implements OnInit {
           this.model = value;
         },
       });
-      this.platforms = this.operatingControlPointService.getPlatformsList(this.inputData.id);
+      // this.platforms = this.operatingControlPointService.getPlatformsList(this.inputData.id);
+      this.platforms = this.refreshSubject.asObservable().pipe(
+        switchMap(()=> this.operatingControlPointService.getPlatformsList(this.inputData.id))
+      );
     } else {
       this.model = new OperatingControlPointFormDto();
       this.model.pointName = '';
@@ -162,5 +167,9 @@ export class OperatingControlPointFormComponent implements OnInit {
   }
   canDelete(): boolean {
     return typeof this.inputData.id !== 'undefined';
+  }
+
+  public refreshPlatformData(){
+    this.refreshSubject.next();
   }
 }

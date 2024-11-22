@@ -47,4 +47,13 @@ public class PlatformController {
         return ResponseEntity.ok(dto);
     }
 
+    @PutMapping("")
+    public ResponseEntity<PlatformDto> updatePlatform(@RequestBody PlatformDto platformDto) {
+        log.debug("Update Platform:  " + platformDto);
+        final PlatformDto dto = platformService.updatePlatform(platformDto);
+        log.debug("Updated platform: " + dto);
+
+        return ResponseEntity.ok(dto);
+    }
+
 }
