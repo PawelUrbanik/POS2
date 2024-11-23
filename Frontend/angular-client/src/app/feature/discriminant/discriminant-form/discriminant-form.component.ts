@@ -2,8 +2,9 @@ import {Component, Inject} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {Discriminant} from "../discriminant";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DiscriminantService} from "../discriminant.service";
+import {ConfirmationDialogComponent} from "../../../core/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-discriminant-form',
@@ -15,7 +16,8 @@ export class DiscriminantFormComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public inputData: any,
     private dialogRef: MatDialogRef<DiscriminantFormComponent>,
-    private discriminantService: DiscriminantService
+    private discriminantService: DiscriminantService,
+    private dialog: MatDialog
   ) {
     if (this.inputData)this.model = structuredClone(inputData.model);
   }
@@ -77,8 +79,17 @@ export class DiscriminantFormComponent {
   }
 
   deleteDiscriminant(): void {
-    this.discriminantService.deleteDiscriminant(this.model.id);
-    this.dialogRef.close(this.model);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+      data: {
+        message: 'Are you sure to delete '+ this.model.shortcut + ' discriminant?'
+      }
+    })
+    dialogRef.afterClosed().subscribe((value)=> {
+      if (value) {
+        this.discriminantService.deleteDiscriminant(this.model.id);
+        this.dialogRef.close(this.model);
+      }
+    })
   }
 
 }

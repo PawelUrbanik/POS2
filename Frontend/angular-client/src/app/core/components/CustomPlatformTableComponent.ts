@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ViewContainerRef} from '@angular/core';
 import {FieldType} from '@ngx-formly/core';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -8,9 +8,10 @@ import {
 import {PlatformRowDto} from "../../feature/operating-control-point/operating-control-point.model";
 import {MatDialog} from "@angular/material/dialog";
 import {PlatformFormComponent} from "../../feature/platform/platform-form/platform-form.component";
-import {OperatingControlPointService} from "../../feature/operating-control-point/operating-control-point.service";
 import {PlatformService} from "../../feature/platform/platform.service";
 import {tap} from "rxjs/operators";
+import {ConfirmationDialogComponent} from "./confirmation-dialog/confirmation-dialog.component";
+
 @Component({
   selector: 'platforms-list-form',
   template: `
@@ -92,7 +93,6 @@ export class CustomPlatformTableComponent extends FieldType {
   dataSource = new MatTableDataSource<PlatformRowDto[]>();
 
 
-
   editRow(element: PlatformRowDto) {
     const formDialog = this.dialog.open(PlatformFormComponent,
       {
@@ -110,9 +110,18 @@ export class CustomPlatformTableComponent extends FieldType {
 
 
   deleteRow(element: PlatformRowDto) {
-    this.platformService.deletePlatform(element.id).pipe(
-      tap(() => this.refreshDataSource())
-    ).subscribe();
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure to delete platform?'
+      }
+    })
+    dialogRef.afterClosed().subscribe((value) => {
+      if (value) {
+        this.platformService.deletePlatform(element.id).pipe(
+          tap(() => this.refreshDataSource())
+        ).subscribe();
+      }
+    })
   }
 
   /**
@@ -126,8 +135,7 @@ export class CustomPlatformTableComponent extends FieldType {
       }
     });
     formDialog.afterClosed().subscribe((result) => {
-      if (result)
-      {
+      if (result) {
         this.refreshDataSource();
       }
     })

@@ -9,10 +9,12 @@ import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {PlatformModule} from "../feature/platform/platform.module";
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
-  declarations: [FormlyFieldTabs, CustomPlatformTableComponent],
+  declarations: [FormlyFieldTabs, CustomPlatformTableComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -22,7 +24,8 @@ import {PlatformModule} from "../feature/platform/platform.module";
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    PlatformModule
+    PlatformModule,
+    MatDialogModule
   ]
 })
 export class CoreModule { }

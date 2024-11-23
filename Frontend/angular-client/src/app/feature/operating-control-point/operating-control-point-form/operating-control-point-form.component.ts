@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { OperatingControlPointService } from '../operating-control-point.service';
@@ -14,7 +14,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import { DepartmentService } from '../../department/department.service';
 import { DepartmentRowDto } from '../../department/department.model';
 import { MatTableDataSource } from '@angular/material/table';
-import {switchMap} from "rxjs/operators";
+import {count, map, switchMap} from "rxjs/operators";
+import {ConfirmationDialogComponent} from "../../../core/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-operating-control-point-form',
@@ -27,7 +28,8 @@ export class OperatingControlPointFormComponent implements OnInit {
     private dialogRef: MatDialogRef<OperatingControlPointFormComponent>,
     private operatingControlPointService: OperatingControlPointService,
     private discriminantService: DiscriminantService,
-    private railwayDepartmentService: DepartmentService
+    private railwayDepartmentService: DepartmentService,
+    private dialog: MatDialog
   ) {}
 
   form = new FormGroup({});
@@ -161,11 +163,23 @@ export class OperatingControlPointFormComponent implements OnInit {
   }
 
   delete(): void {
-    if (this.inputData.id) {
-      this.operatingControlPointService.delete(this.model.id).subscribe(() => {
-        this.dialogRef.close(this.model);
-      });
-    }
+    const confirmDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure to delete '+ this.model.pointName + ' operating control point?'
+      }
+    })
+
+    confirmDialogRef.afterClosed().subscribe(
+      (value) => {
+        if (value) {
+          if (this.inputData.id) {
+            this.operatingControlPointService.delete(this.model.id).subscribe(() => {
+              this.dialogRef.close(this.model);
+            });
+          }
+        }
+      }
+    )
   }
   canDelete(): boolean {
     return typeof this.inputData.id !== 'undefined';
