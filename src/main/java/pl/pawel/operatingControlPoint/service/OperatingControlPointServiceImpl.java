@@ -1,5 +1,6 @@
 package pl.pawel.operatingControlPoint.service;
 
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,6 @@ import pl.pawel.operatingControlPoint.repository.OperatingControlPointRepository
 import pl.pawel.railwayDepartment.model.RailwayDepartment;
 import pl.pawel.railwayDepartment.repository.RailwayDepartmentRepository;
 
-import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

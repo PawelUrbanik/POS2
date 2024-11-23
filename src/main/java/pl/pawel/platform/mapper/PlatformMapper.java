@@ -4,10 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import pl.pawel.edge.model.Edge;
-import pl.pawel.platform.model.Platform;
-import pl.pawel.platform.model.PlatformDto;
-import pl.pawel.platform.model.PlatformSelectOptionDto;
-import pl.pawel.platform.model.PlatformTabTableRowDto;
+import pl.pawel.platform.model.*;
 
 import java.util.Set;
 
@@ -24,4 +21,6 @@ public interface PlatformMapper {
     default Integer countEdges(Set<Edge> edges) {
         return edges == null ? 0 : edges.size();
     }
+
+    Platform saveDtoToEntity(SavePlatformDto platformDto);
 }

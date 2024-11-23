@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.pawel.platform.model.PlatformDto;
 import pl.pawel.platform.model.PlatformSelectOptionDto;
 import pl.pawel.platform.model.PlatformTabTableRowDto;
+import pl.pawel.platform.model.SavePlatformDto;
 import pl.pawel.platform.service.PlatformService;
 
 import java.util.List;
@@ -54,6 +55,16 @@ public class PlatformController {
         log.debug("Updated platform: " + dto);
 
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/add/{pointId}")
+    public ResponseEntity<PlatformDto> savePlatform(
+            @PathVariable Long pointId,
+            @RequestBody SavePlatformDto platformDto) {
+        log.debug("Save Platform:  " + platformDto);
+        PlatformDto saved = platformService.savePlatform(platformDto, pointId);
+        log.debug("Saved platform: " + platformDto);
+        return ResponseEntity.ok(saved);
     }
 
 }

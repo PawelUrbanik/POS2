@@ -1,12 +1,12 @@
 package pl.pawel.platform.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
+import pl.pawel.operatingControlPoint.repository.OperatingControlPointRepository;
 import pl.pawel.platform.mapper.PlatformMapper;
-import pl.pawel.platform.model.Platform;
-import pl.pawel.platform.model.PlatformDto;
-import pl.pawel.platform.model.PlatformSelectOptionDto;
-import pl.pawel.platform.model.PlatformTabTableRowDto;
+import pl.pawel.platform.model.*;
 import pl.pawel.platform.repository.PlatformRepository;
 
 import java.util.List;
@@ -19,6 +19,8 @@ public class PlatformServiceImpl implements PlatformService{
 
     private final PlatformRepository platformRepository;
     private final PlatformMapper platformMapper;
+    private final OperatingControlPointRepository operatingControlPointRepository;
+
     @Override
     public List<PlatformSelectOptionDto> getAllByOperatingControlPoint(Long pointId) {
 
@@ -59,5 +61,15 @@ public class PlatformServiceImpl implements PlatformService{
         PlatformDto savedDto = platformMapper.entityToPlatformDto(saved);
 
         return savedDto;
+    }
+
+    @Override
+    @Transactional
+    public PlatformDto savePlatform(SavePlatformDto platformDto, Long pointId) {
+        Platform platform = platformMapper.saveDtoToEntity(platformDto);
+        OperatingControlPoint opc = operatingControlPointRepository.getById(pointId);
+        platform.setOperatingControlPoint(opc);
+        Platform saved = platformRepository.save(platform);
+        return platformMapper.entityToPlatformDto(saved);
     }
 }

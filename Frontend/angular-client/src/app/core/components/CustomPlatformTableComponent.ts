@@ -119,7 +119,18 @@ export class CustomPlatformTableComponent extends FieldType {
    * Adds a new row to the table
    */
   addNewRow() {
-    const formDialog = this.dialog.open(PlatformFormComponent);
+    const parent = this.viewContainerRef.injector.get(OperatingControlPointFormComponent, null);
+    const formDialog = this.dialog.open(PlatformFormComponent, {
+      data: {
+        operatingPointId: parent?.model.id
+      }
+    });
+    formDialog.afterClosed().subscribe((result) => {
+      if (result)
+      {
+        this.refreshDataSource();
+      }
+    })
   }
 
   private refreshDataSource() {

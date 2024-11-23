@@ -13,7 +13,7 @@ import {FormlyFieldConfig} from "@ngx-formly/core";
 export class PlatformFormComponent implements OnInit{
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public id: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<PlatformFormComponent>,
     private platformService: PlatformService){
   }
@@ -75,10 +75,10 @@ export class PlatformFormComponent implements OnInit{
   onSubmit() {
     if (this.form.valid) {
       this.dialogRef.close(this.model);
-      if (typeof (this.model.id) !== 'undefined') {
+      if (this.model.id !== undefined) {
         this.platformService.updatePlatform(this.model).subscribe();
       } else {
-        this.platformService.createPlatform(this.model);
+        this.platformService.createPlatform(this.model, this.data.operatingPointId).subscribe();
       }
     }
     this.dialogRef.close(this.model);
@@ -97,7 +97,7 @@ export class PlatformFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if (this.id === undefined) {
+    if (!this.data.id) {
       this.model = {
         edges: [],
         height: 0,
@@ -106,7 +106,7 @@ export class PlatformFormComponent implements OnInit{
         platformNumber: ''
       }
     } else {
-      this.platformService.getOne(this.id.id).subscribe(
+      this.platformService.getOne(this.data.id).subscribe(
         {
           next: platform => this.model = platform
         }

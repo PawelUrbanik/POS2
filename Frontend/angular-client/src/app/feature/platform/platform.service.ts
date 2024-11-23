@@ -23,11 +23,11 @@ export class PlatformService {
     return this.httpClient.put<Platform>(PLATFORMS_URL, platform)
   }
 
-  createPlatform(model: Platform) {
-
+  createPlatform(platform: Platform, operatingControlPointId: number) {
+    return this.httpClient.post(PLATFORMS_URL+"/add/"+operatingControlPointId, platform)
   }
 
-  deletePlatform(id: number) {
+  deletePlatform(id: any) {
 
   }
 }

@@ -1,0 +1,1 @@
+CREATE SEQUENCE platform_sequence START WITH (SELECT MAX(id) + 1 FROM PLATFORM );
