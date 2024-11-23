@@ -11,7 +11,7 @@ import pl.pawel.operatingControlPoint.model.OperatingControlPointRowDto;
 import pl.pawel.operatingControlPoint.model.OperatingControlPointSearchCriteria;
 import pl.pawel.operatingControlPoint.service.OperatingControlPointService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.net.URI;
 
 @Slf4j

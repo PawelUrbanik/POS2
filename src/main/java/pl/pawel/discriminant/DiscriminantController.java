@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.pawel.discriminant.model.DiscirminantDto;
 import pl.pawel.discriminant.service.DiscriminantService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController()

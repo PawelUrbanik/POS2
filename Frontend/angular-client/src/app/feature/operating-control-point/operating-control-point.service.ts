@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {OPERATING_CONTROL_POINTS_URL} from "../../core/constants";
+import {PLATFORMS_URL} from "../../core/constants";
 import {
   OperatingControlPointFormDto,
   OperatingControlPointResponse,
-  OperatingControlPointSearchCriteria
+  OperatingControlPointSearchCriteria, PlatformOptionDto, PlatformRowDto
 } from "./operating-control-point.model";
 
 @Injectable({
@@ -44,9 +45,13 @@ export class OperatingControlPointService {
   }
 
   update(point: OperatingControlPointFormDto) {
-    this.httpClient.put(OPERATING_CONTROL_POINTS_URL +"/"+point.id , point).subscribe();
+     return this.httpClient.put<OperatingControlPointFormDto>(OPERATING_CONTROL_POINTS_URL +"/"+point.id , point).subscribe();
   }
   delete(pointId: number) {
-    this.httpClient.delete(OPERATING_CONTROL_POINTS_URL +"/"+pointId, {}).subscribe();
+    return this.httpClient.delete(OPERATING_CONTROL_POINTS_URL +"/"+pointId, {});
+  }
+
+  getPlatformsList(pointId: number): Observable<PlatformRowDto[]> {
+    return this.httpClient.get<PlatformRowDto[]>(PLATFORMS_URL + "/getList/"+ pointId, {});
   }
 }

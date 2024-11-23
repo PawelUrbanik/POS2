@@ -6,7 +6,7 @@ import lombok.Setter;
 import pl.pawel.edge.model.Edge;
 import pl.pawel.operatingControlPoint.model.OperatingControlPoint;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -16,7 +16,8 @@ import java.util.Set;
 public class Platform {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "platform_sequence")
+    @SequenceGenerator(name = "platform_sequence", sequenceName = "platform_sequence", allocationSize = 1)
     private Long id;
     private String platformNumber;
     private Double height;

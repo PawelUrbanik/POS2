@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.pawel.edge.model.Edge;
 import pl.pawel.edge.repository.EdgeRepository;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

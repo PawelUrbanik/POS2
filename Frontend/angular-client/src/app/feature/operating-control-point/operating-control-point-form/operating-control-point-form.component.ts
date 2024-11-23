@@ -1,25 +1,27 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {FormlyFieldConfig} from "@ngx-formly/core";
-import {OperatingControlPointService} from "../operating-control-point.service";
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormGroup } from '@angular/forms';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { OperatingControlPointService } from '../operating-control-point.service';
 import {
   OperatingControlPointFormDto,
-  OperatingControlPointRowDto
-} from "../operating-control-point.model";
-import {Discriminant} from "../../discriminant/discriminant";
-import {DiscriminantService} from "../../discriminant/discriminant.service";
-import {Observable} from "rxjs";
-import {DepartmentService} from "../../department/department.service";
-import {DepartmentRowDto} from "../../department/department.model";
+  OperatingControlPointRowDto,
+  PlatformRowDto,
+} from '../operating-control-point.model';
+import { Discriminant } from '../../discriminant/discriminant';
+import { DiscriminantService } from '../../discriminant/discriminant.service';
+import {BehaviorSubject, Observable} from 'rxjs';
+import { DepartmentService } from '../../department/department.service';
+import { DepartmentRowDto } from '../../department/department.model';
+import { MatTableDataSource } from '@angular/material/table';
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-operating-control-point-form',
   templateUrl: './operating-control-point-form.component.html',
-  styleUrls: ['./operating-control-point-form.component.css']
+  styleUrls: ['./operating-control-point-form.component.css'],
 })
-export class OperatingControlPointFormComponent implements OnInit{
-
+export class OperatingControlPointFormComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public inputData: OperatingControlPointRowDto,
     private dialogRef: MatDialogRef<OperatingControlPointFormComponent>,
@@ -29,11 +31,13 @@ export class OperatingControlPointFormComponent implements OnInit{
   ) {}
 
   form = new FormGroup({});
-
   model!: OperatingControlPointFormDto;
 
+  private refreshSubject = new BehaviorSubject<void>(undefined);
   discriminants: Observable<Discriminant[]> = this.discriminantService.getDiscriminant();
   railwayDepartments: Observable<DepartmentRowDto[]> = this.railwayDepartmentService.getDepartments();
+  platforms: Observable<PlatformRowDto[]> = new Observable<PlatformRowDto[]>();
+
   fields: FormlyFieldConfig[] = [
     {
       type: 'tabs',
@@ -46,8 +50,7 @@ export class OperatingControlPointFormComponent implements OnInit{
               type: 'input',
               props: {
                 label: 'ID',
-                placeholder: 'Id',
-                readonly: true
+                readonly: true,
               },
               expressions: {
                 hide: '!model.id',
@@ -57,12 +60,11 @@ export class OperatingControlPointFormComponent implements OnInit{
               key: 'pointName',
               type: 'input',
               props: {
-                label: 'Point name',
+                label: 'Point Name',
                 placeholder: 'Point name',
                 required: true,
-                readonly: false,
-                maxLength: 255
-              }
+                maxLength: 255,
+              },
             },
             {
               key: 'discriminant.id',
@@ -72,8 +74,8 @@ export class OperatingControlPointFormComponent implements OnInit{
                 options: this.discriminants,
                 valueProp: 'id',
                 labelProp: 'shortcut',
-                required: true
-              }
+                required: true,
+              },
             },
             {
               key: 'railwayDepartment.id',
@@ -83,38 +85,45 @@ export class OperatingControlPointFormComponent implements OnInit{
                 options: this.railwayDepartments,
                 valueProp: 'id',
                 labelProp: 'name',
-                required: true
-              }
+                required: true,
+              },
             },
             {
               key: 'loadingPoint',
               type: 'checkbox',
+              defaultValue: false,
               props: {
                 label: 'Loading Point',
-                indeterminate: false
-              }
+              },
             },
             {
               key: 'otherManager',
               type: 'checkbox',
+              defaultValue: false,
               props: {
                 label: 'Other Manager',
-                indeterminate: false
-              }
+              },
             },
           ],
         },
         {
-          //TODO Po dodaniu encji z peronami wyświetlać listę peronów z możliwością edycji każdego rekordu, dodania, usunięcia
           props: { label: 'Platforms' },
           fieldGroup: [
             {
-              key: 'platform',
-              type: 'input',
+              key: 'platformData',
+              type: 'platformsListForm',
               props: {
-                label: 'Platform',
-                required: false,
+                dataSource: new MatTableDataSource([]), // Puste dane, które zostaną zaktualizowane
               },
+              hooks: {
+                onInit: (field) => {
+                  this.platforms.subscribe((data) => {
+                    if (field.props) {
+                      field.props.dataSource = new MatTableDataSource(data);
+                    }
+                  });
+                },
+              }
             },
           ],
         },
@@ -123,40 +132,46 @@ export class OperatingControlPointFormComponent implements OnInit{
   ];
 
   ngOnInit(): void {
-    if (this.inputData.id !== undefined){
+    // Jeśli istnieje ID, pobierz dane
+    if (this.inputData.id !== undefined) {
       this.operatingControlPointService.getOne(this.inputData.id).subscribe({
-        next: value => {
+        next: (value) => {
           this.model = value;
-        }
-      })
+        },
+      });
+      // this.platforms = this.operatingControlPointService.getPlatformsList(this.inputData.id);
+      this.platforms = this.refreshSubject.asObservable().pipe(
+        switchMap(()=> this.operatingControlPointService.getPlatformsList(this.inputData.id))
+      );
     } else {
       this.model = new OperatingControlPointFormDto();
       this.model.pointName = '';
     }
-
   }
+
   onSubmit() {
     if (this.form.valid) {
-      if (typeof (this.model.id) !== 'undefined') {
+      if (typeof this.model.id !== 'undefined') {
         this.operatingControlPointService.update(this.model);
       } else {
         this.operatingControlPointService.create(this.model);
       }
-    }
-    setTimeout(()=> {
       this.dialogRef.close(this.model);
-    }, 500)
-  }
-
-  canDelete(): boolean {
-    return typeof(this.inputData.id) !== 'undefined';
+    }
   }
 
   delete(): void {
-    this.operatingControlPointService.delete(this.model.id);
-    setTimeout(()=> {
-      this.dialogRef.close(this.model);
-    }, 500)
+    if (this.inputData.id) {
+      this.operatingControlPointService.delete(this.model.id).subscribe(() => {
+        this.dialogRef.close(this.model);
+      });
+    }
+  }
+  canDelete(): boolean {
+    return typeof this.inputData.id !== 'undefined';
   }
 
+  public refreshPlatformData(){
+    this.refreshSubject.next();
+  }
 }

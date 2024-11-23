@@ -1,0 +1,1 @@
+CREATE SEQUENCE operating_control_point_sequence START WITH (SELECT MAX(id) + 1 FROM OPERATING_CONTROL_POINT );
