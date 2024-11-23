@@ -67,4 +67,15 @@ public class PlatformController {
         return ResponseEntity.ok(saved);
     }
 
+    @DeleteMapping("/{platformId}")
+    public ResponseEntity<?> deletePlatform(@PathVariable Long platformId) {
+        log.debug("Delete Platform:  " + platformId);
+        try {
+            platformService.deletePlatform(platformId);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
+    }
+
 }

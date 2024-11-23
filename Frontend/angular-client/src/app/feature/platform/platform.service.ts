@@ -28,6 +28,6 @@ export class PlatformService {
   }
 
   deletePlatform(id: any) {
-
+    return this.httpClient.delete(PLATFORMS_URL+'/'+ id, {})
   }
 }

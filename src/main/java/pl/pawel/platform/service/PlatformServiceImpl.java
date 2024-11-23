@@ -72,4 +72,9 @@ public class PlatformServiceImpl implements PlatformService{
         Platform saved = platformRepository.save(platform);
         return platformMapper.entityToPlatformDto(saved);
     }
+
+    @Override
+    public void deletePlatform(Long id) {
+        platformRepository.deleteById(id);
+    }
 }

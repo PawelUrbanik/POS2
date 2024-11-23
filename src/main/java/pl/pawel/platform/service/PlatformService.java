@@ -18,4 +18,6 @@ public interface PlatformService {
     PlatformDto updatePlatform(PlatformDto platformDto);
 
     PlatformDto savePlatform(SavePlatformDto platformDto, Long pointId);
+
+    void deletePlatform(Long id);
 }

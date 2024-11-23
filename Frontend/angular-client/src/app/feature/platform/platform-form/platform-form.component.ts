@@ -84,18 +84,6 @@ export class PlatformFormComponent implements OnInit{
     this.dialogRef.close(this.model);
   }
 
-  canDelete(): boolean {
-    return false
-    // return typeof(this.model.id) !== 'undefined';
-  }
-
-  deletePlatform(): void {
-    if (this.model.id !== undefined){
-      this.platformService.deletePlatform(this.model.id);
-    }
-    this.dialogRef.close(this.model);
-  }
-
   ngOnInit(): void {
     if (!this.data.id) {
       this.model = {

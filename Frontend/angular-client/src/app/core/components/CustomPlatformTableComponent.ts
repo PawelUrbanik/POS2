@@ -9,6 +9,8 @@ import {PlatformRowDto} from "../../feature/operating-control-point/operating-co
 import {MatDialog} from "@angular/material/dialog";
 import {PlatformFormComponent} from "../../feature/platform/platform-form/platform-form.component";
 import {OperatingControlPointService} from "../../feature/operating-control-point/operating-control-point.service";
+import {PlatformService} from "../../feature/platform/platform.service";
+import {tap} from "rxjs/operators";
 @Component({
   selector: 'platforms-list-form',
   template: `
@@ -66,7 +68,7 @@ export class CustomPlatformTableComponent extends FieldType {
   constructor(
     public viewContainerRef: ViewContainerRef,
     public dialog: MatDialog,
-    private operatingControlPointService: OperatingControlPointService
+    private platformService: PlatformService
   ) {
     super();
     const parent = this.viewContainerRef.injector.get(OperatingControlPointFormComponent, null);
@@ -108,11 +110,9 @@ export class CustomPlatformTableComponent extends FieldType {
 
 
   deleteRow(element: PlatformRowDto) {
-    // const index = this.dataSource.data.indexOf(element);
-    // if (index > -1) {
-    //   this.dataSource.data.splice(index, 1);
-    //   this.dataSource._updateChangeSubscription();
-    // }
+    this.platformService.deletePlatform(element.id).pipe(
+      tap(() => this.refreshDataSource())
+    ).subscribe();
   }
 
   /**
